@@ -7,10 +7,12 @@ import Contact from './components/Contact/Contact';
 import SingleProduct from './components/SingleProduct/SingleProduct';
 import Cart from './components/Cart/Cart';
 import ErrorPage from './components/ErrorPage/ErrorPage';
+import Header from "./components/Header/Header"
 
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
