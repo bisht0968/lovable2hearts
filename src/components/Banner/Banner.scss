@@ -1,0 +1,140 @@
+@import '../css-config/mixins.scss';
+
+.bannerSection {
+    background-color: #f1e8e3;
+
+    .bannerContent {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        @include xsm {
+            flex-direction: column-reverse;
+        }
+
+        @include sm {
+            flex-direction: column-reverse;
+        }
+
+        .bannerLeft {
+            .bannerImage {
+                width: 400px;
+                height: 475px;
+
+                @include xsm {
+                    width: 100%;
+                }
+
+                @include sm {
+                    width: 50%;
+                    margin: 0 auto;
+                    height: 350px;
+                }
+
+                @include md {
+                    height: 496px;
+                }
+
+                img {
+                    width: 100%;
+                    overflow: hidden;
+                    height: 100%;
+                }
+            }
+        }
+
+        .bannerRight {
+            width: 50%;
+            margin: 100px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+
+            @include xsm {
+                width: 80%;
+                margin: 50px auto;
+                gap: 20px;
+            }
+
+            @include sm {
+                width: 90%;
+                margin: 50px auto;
+                gap: 20px;
+            }
+
+            .bannerText {
+                display: flex;
+                flex-direction: column;
+                gap: 40px;
+
+                @include xsm {
+                    gap: 20px;
+                }
+
+                @include sm {
+                    gap: 20px;
+                }
+
+                .bannerHeading {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
+                    @include xsm {
+                        gap: 5px;
+                    }
+
+                    @include sm {
+                        gap: 5px;
+                    }
+
+                    .welcomeMessage {
+                        font-size: 20px;
+                        color: rgba(0, 0, 0, 0.6);
+                    }
+
+                    .heading {
+                        font-size: 60px;
+                        font-weight: 700;
+                        color: #f1641e;
+
+                        @include xsm {
+                            font-size: 45px;
+                        }
+                    }
+                }
+
+                .bannerMessage {
+                    color: rgba(0, 0, 0, 0.6);
+                }
+            }
+
+            .bannerButton {
+                border: 2px solid rgba(0, 0, 0, 0.7);
+                width: 20%;
+                padding: 10px;
+                border-radius: 10px;
+                text-align: center;
+                font-weight: 600;
+                color: black;
+
+                @include xsm {
+                    width: 50%;
+                    margin: 0 auto;
+                }
+
+                @include sm {
+                    width: 20%;
+                    margin: 0 auto;
+                }
+            }
+
+            .bannerButton:hover {
+                cursor: pointer;
+                color: #f1641e;
+                transition: all 0.3s;
+                border: 2px solid #f1641e;
+            }
+        }
+    }
+}
