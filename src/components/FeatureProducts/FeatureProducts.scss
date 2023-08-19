@@ -1,0 +1,78 @@
+@import "../../css-config/mixins.scss";
+
+.featureProdcutsSection {
+    .featureProductsContent {
+        background-color: rgb(255, 252, 245);
+
+        .featureProductsContainer {
+            width: 60%;
+            padding: 50px;
+            margin: 0 auto;
+
+            @include xsm {
+                width: 80%;
+                padding: 30px 0;
+            }
+
+            @include sm {
+                width: 80%;
+                padding: 30px 0;
+            }
+
+            .featureProductstext {
+                .smallText {
+                    color: rgb(112, 39, 201);
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+
+                .heading {
+                    font-size: 30px;
+                    font-weight: 600;
+                }
+            }
+
+            .featureProductsItems {
+                display: flex;
+                justify-content: space-between;
+                margin-block: 40px;
+
+                @include xsm {
+                    flex-wrap: wrap;
+                    margin-block: 20px;
+                    gap: 10px;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                @include sm {
+                    margin-block: 20px;
+                    gap: 10px;
+                    align-items: center;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                }
+
+                .buffering {
+                    text-align: center;
+                    margin: 0 auto;
+
+                    .bufferIcon {
+                        font-size: 80px;
+                    }
+
+                    .bufferText {
+                        font-size: 30px;
+                    }
+                }
+
+                .featureProductsItem:hover {
+                    cursor: pointer;
+                    transform: scale(1.1);
+                    transition: all 0.3s;
+                }
+            }
+        }
+
+    }
+}

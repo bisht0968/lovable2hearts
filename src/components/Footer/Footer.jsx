@@ -2,8 +2,12 @@ import React from 'react'
 import "./Footer.scss"
 import { AiOutlineInstagram, AiOutlineYoutube, AiOutlineGithub, AiOutlinePhone } from "react-icons/ai"
 import { BiLogoGmail } from "react-icons/bi"
+import { useNavigate } from "react-router-dom"
 
 export default function Footer() {
+
+    const navigate = useNavigate();
+
     return (
         <div className='footerSection'>
             <div className="footerContent">
@@ -18,10 +22,22 @@ export default function Footer() {
                     </div>
                     <div className="section mobileSection">
                         <ul className="footerMenu">
-                            <li>Home</li>
-                            <li>About</li>
-                            <li>Products</li>
-                            <li>Contact</li>
+                            <li onClick={() => {
+                                navigate('/')
+                                window.scrollTo({ top: 0, behavior: 'smooth' })
+                            }}>Home</li>
+                            <li onClick={() => {
+                                navigate('/about')
+                                window.scrollTo({ top: 0, behavior: 'smooth' })
+                            }}>About</li>
+                            <li onClick={() => {
+                                navigate('/products')
+                                window.scrollTo({ top: 0, behavior: 'smooth' })
+                            }}>Products</li>
+                            <li onClick={() => {
+                                navigate('/contact')
+                                window.scrollTo({ top: 0, behavior: 'smooth' })
+                            }}>Contact</li>
                         </ul>
                     </div>
                     <div className="section mobileSection">
