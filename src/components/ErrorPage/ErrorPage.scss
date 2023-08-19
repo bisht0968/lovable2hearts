@@ -1,0 +1,66 @@
+@import "../css-config/mixins.scss";
+
+.errorPageSection {
+    .errorPageContent {
+        .errorContainer {
+            width: 80%;
+            margin: auto;
+            margin-block-end: 90px;
+
+            .errorImage {
+                width: 200px;
+                margin: 0 auto;
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            .errorStatus {
+                text-align: center;
+                font-size: 80px;
+                font-weight: 600;
+            }
+
+            .errorMessage {
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+
+                .bigText {
+                    font-size: 40px;
+                    margin-block-end: 20px;
+                    font-weight: 300;
+                }
+
+                .smallText {
+                    font-size: 13px;
+                }
+            }
+
+            .errorButton {
+                width: 10%;
+                padding: 10px;
+                font-weight: 600;
+                text-align: center;
+                color: white;
+                background-color: #f1641e;
+                border-radius: 2px;
+                margin: 20px auto;
+                border: 1px solid #f1641e;
+
+                @include xsm {
+                    width: 60%;
+                }
+            }
+
+            .errorButton:hover {
+                cursor: pointer;
+                color: #f1641e;
+                background-color: white;
+                transition: all 0.3s;
+                border: 1px solid #f1641e;
+            }
+        }
+    }
+}
