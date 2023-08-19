@@ -1,0 +1,225 @@
+@import "../css-config/mixins.scss";
+
+.footerSection {
+    padding-block: 60px;
+    background-color: rgb(0, 0, 44);
+    color: white;
+
+    @include xsm {
+        padding-block: 10px;
+    }
+
+    @include sm {
+        padding-block: 30px;
+    }
+
+    .footerContent {
+        .footerUpperSection {
+            display: flex;
+            justify-content: space-evenly;
+            width: 80%;
+            margin: 0 auto;
+            padding-bottom: 40px;
+            border-bottom: 1px solid white;
+
+            @include xsm {
+                flex-wrap: wrap;
+                width: 100%;
+                gap: 0;
+            }
+
+            @include sm {
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .section {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                width: 40%;
+
+                @include xsm {
+                    width: 80%;
+                }
+
+                @include sm {
+                    gap: 10px;
+                }
+
+                .footerHeading {
+                    font-weight: 600;
+
+                    @include xsm {
+                        font-size: 16px;
+                    }
+
+                    @include sm {
+                        font-size: 16px;
+                    }
+                }
+
+                .footerUpperText {
+                    @include xsm {
+                        font-size: 9px;
+                        padding-block-end: 20px;
+                    }
+
+                    @include sm {
+                        font-size: 11px;
+                        padding-block-end: 20px;
+                    }
+                }
+
+                .footerMenu {
+                    margin-block: 0;
+                    list-style: none;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                    justify-content: flex-start;
+                    align-items: center;
+
+                    @include xsm {
+                        align-items: flex-start;
+                        padding-inline-start: 20px;
+                        font-size: 12px;
+                        gap: 10px;
+                    }
+
+                    @include sm {
+                        padding-block-end: 30px;
+                        font-size: 12px;
+                        gap: 10px;
+                        padding-inline-start: 0;
+                    }
+                }
+
+                .footerMenu li:hover {
+                    cursor: pointer;
+                }
+
+                .footerIcons {
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+                    margin-block: 10px;
+
+                    svg {
+                        font-size: 28px;
+                        border: 1px solid white;
+                        border-radius: 50%;
+                        padding: 10px;
+
+                        @include xsm {
+                            font-size: 16px;
+                        }
+
+                        @include sm {
+                            font-size: 18px;
+                            padding: 7px;
+                        }
+                    }
+
+                    svg:hover {
+                        color: rgb(0, 0, 44);
+                        background-color: white;
+                        cursor: pointer;
+                        transition: all 0.3s;
+                    }
+                }
+
+                .footerContact {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
+                    @include xsm {
+                        gap: 5px;
+                    }
+
+                    .footerContactText {
+                        display: flex;
+                        gap: 20px;
+
+                        @include xsm {
+                            font-size: 10px;
+                            gap: 10px;
+                        }
+
+                        @include sm {
+                            font-size: 12px;
+                            gap: 10px;
+                        }
+                    }
+                }
+
+                &.mobileSection {
+                    @include xsm {
+                        width: 40%;
+                        gap: 0;
+                    }
+                }
+
+                &.footerContactSection {
+                    @include xsm {
+                        padding-block-start: 20px;
+                    }
+                }
+            }
+        }
+
+        .footerLowerSection {
+            padding-block-start: 40px;
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+
+            @include xsm {
+                padding-block-start: 10px;
+            }
+
+            .copyrightMessage {
+                font-size: 10px;
+
+                @include xsm {
+                    width: 40%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                }
+
+                @include sm {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                }
+            }
+
+            .footerLowerMenu {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+
+                .footerLowerText {
+                    font-size: 14px;
+
+                    @include xsm {
+                        font-size: 10px;
+                    }
+
+                    @include sm {
+                        font-size: 12px;
+                    }
+                }
+
+                .footerLowerText:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

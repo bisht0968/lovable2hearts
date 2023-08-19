@@ -8,6 +8,7 @@ import SingleProduct from './components/SingleProduct/SingleProduct';
 import Cart from './components/Cart/Cart';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import Header from "./components/Header/Header"
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
