@@ -1,9 +1,9 @@
 import React from 'react'
-import "./Products.scss"
+import "./Product.scss"
 
 import { useNavigate } from "react-router-dom"
 
-export default function Product({ productDetailsData }) {
+export default function Product({ productDetailsData, gridLayout }) {
 
     const navigate = useNavigate();
 
@@ -28,6 +28,16 @@ export default function Product({ productDetailsData }) {
                                 maximumFractionDigits: 2
                             }).format(productDetailsData.price / 100)}
                         </div>
+                        {!gridLayout &&
+                            <>
+                                <div className='productDescription'>
+                                    {productDetailsData.description.split(' ').length > 18 ? productDetailsData.description.split(' ').slice(0, 18).join(" ") + "..." : productDetailsData.description}
+                                </div>
+                                <div className="productLinkButton">
+                                    Shop Now
+                                </div>
+                            </>
+                        }
                     </div>
                 </div>
             </div>

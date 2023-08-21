@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import "./SingleProduct.scss"
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from "axios"
 import { TbTruckDelivery, TbReplace } from "react-icons/tb"
 import { BsShieldShaded, BsStarHalf } from "react-icons/bs"
-import { AiOutlineLeft, AiOutlineRight, AiOutlineStar, AiFillStar } from "react-icons/ai"
+import { AiOutlineLeft, AiOutlineRight, AiOutlineStar, AiFillStar, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"
 
 export default function SingleProduct() {
 
     const productId = useParams({});
+
+    const navigate = useNavigate();
 
     const [singleProductDetails, setSingleProductDetails] = useState({});
     const [mainImage, setMainImage] = useState({});
@@ -178,11 +180,14 @@ export default function SingleProduct() {
                         </div>
                         <div className="singleProductCartSection">
                             <div className="counters">
-                                <span className="counter leftCounter" onClick={handleDecrement}>-</span>
+                                <span className="counter leftCounter" onClick={handleDecrement}><AiOutlineMinus /></span>
                                 <span className="value">{cartQuantity}</span>
-                                <span className="counter rightCounter" onClick={handleIncrement}>+</span>
+                                <span className="counter rightCounter" onClick={handleIncrement}><AiOutlinePlus /></span>
                             </div>
-                            <div className="cartButton">
+                            <div className="cartButton" onClick={() => {
+                                navigate('/cart')
+                                window.scrollTo({ top: 0, behavior: 'smooth' })
+                            }}>
                                 ADD TO CART
                             </div>
                         </div>

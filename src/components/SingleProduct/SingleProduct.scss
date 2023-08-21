@@ -248,9 +248,16 @@
                         .counter {
                             padding: 5px;
                             text-align: center;
-                            font-weight: 500;
                             width: 20px;
                             background-color: rgba(0, 0, 0, 0.04);
+
+                            svg {
+                                font-size: 14px;
+                            }
+                        }
+
+                        .counter:hover {
+                            cursor: pointer;
                         }
 
                         .leftCounter {
@@ -275,12 +282,16 @@
 
                     .cartButton {
                         border: 1px solid #f1641e;
-                        width: 40%;
+                        width: 50%;
                         margin: 0 auto;
                         padding: 15px;
                         text-align: center;
                         font-weight: 500;
                         color: #f1641e;
+
+                        @include xsm {
+                            width: 80%;
+                        }
                     }
 
                     .cartButton:hover {

@@ -48,7 +48,8 @@ export default function FeatureProducts() {
                             </div> :
                             productData.map(data => (
                                 <div className="featureProductsItem" key={data.id}>
-                                    <Product productDetailsData={data} />
+                                    <Product gridLayout={true}
+                                        productDetailsData={data} />
                                 </div>
                             ))
                         }

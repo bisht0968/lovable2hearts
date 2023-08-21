@@ -1,0 +1,443 @@
+@import "../../css-config/mixins.scss";
+
+.productsSection {
+    margin-block: 80px;
+    position: relative;
+
+    @include xsm {
+        margin-block: 20px;
+    }
+
+    .productsContent {
+        display: flex;
+        justify-content: center;
+        width: 80%;
+        margin: 0 auto;
+        gap: 10px;
+
+        @include xsm {
+            flex-direction: column;
+        }
+
+        .productsLeft {
+            width: 20%;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+
+            .searchBar {
+                display: flex;
+
+                input {
+                    padding: 8px;
+                    outline: 0;
+                    border: 1px solid black;
+                    border-right: 0;
+                    width: 100%;
+                }
+
+                .searcIcon {
+                    padding: 8px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 1px solid black;
+                    border-left: 0;
+                    background-color: rgba(0, 0, 0, 0.09);
+                }
+
+                .searcIcon:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .categoryFilter {
+                .title {
+                    font-weight: 600;
+                    font-size: 30px;
+                }
+
+                .categoryMenu {
+                    list-style: none;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    padding-inline-start: 10px;
+                    font-weight: 450;
+                }
+
+                .categoryMenu li {
+                    border-bottom: 1px solid white;
+                }
+
+                .categoryMenu li:hover {
+                    cursor: pointer;
+                }
+
+                .categoryMenuActive {
+                    color: rgb(241, 100, 30);
+                    transition: all 0.2s;
+                }
+            }
+
+            .companyFilter {
+                .title {
+                    font-weight: 600;
+                    font-size: 30px;
+                }
+
+                .companyDropdown {
+                    margin-block: 20px;
+                    padding-inline-start: 10px;
+
+                    select {
+                        padding: 5px;
+                        font-weight: 500;
+                        outline: 0;
+                        border-radius: 4px;
+                    }
+
+                    select:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .clearFilters {
+
+                .clearFilterButton {
+                    font-size: 18px;
+                    font-weight: 500;
+                    color: white;
+                    background-color: rgb(241, 100, 30);
+                    width: 50%;
+                    padding: 10px;
+                    margin-block: 40px;
+                    text-align: center;
+                    border: 1px solid white;
+                }
+
+                .clearFilterButton:hover {
+                    color: rgb(241, 100, 30);
+                    background-color: white;
+                    border: 1px solid rgb(241, 100, 30);
+                    transition: all 0.3s;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .prodcutsMobileFilterButton {
+            font-size: 20px;
+            font-weight: 600;
+            padding: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            width: 30%;
+        }
+
+        .mobileFilterLayout {
+            position: absolute;
+            left: 0;
+            top: -20px;
+            background-color: white;
+            z-index: 100;
+            height: 550px;
+            padding: 40px;
+            border-bottom-right-radius: 10px;
+
+            .mobileFilterHeading {
+                margin-block-end: 20px;
+                display: flex;
+                justify-content: space-between;
+
+                .text {
+                    font-size: 30px;
+                    font-weight: 600;
+                }
+
+                .crossIcon {
+                    font-weight: 500;
+                    font-size: 20px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+
+
+            .searchBar {
+                display: flex;
+
+                input {
+                    padding: 8px;
+                    outline: 0;
+                    border: 1px solid black;
+                    border-right: 0;
+                    width: 100%;
+                }
+
+                .searcIcon {
+                    padding: 8px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 1px solid black;
+                    border-left: 0;
+                    background-color: rgba(0, 0, 0, 0.09);
+                }
+
+                .searcIcon:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .categoryFilter {
+                .title {
+                    font-weight: 600;
+                    font-size: 30px;
+                    margin-block: 20px;
+                }
+
+                .categoryMenu {
+                    list-style: none;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    padding-inline-start: 10px;
+                    font-weight: 450;
+                }
+
+                .categoryMenu li {
+                    border-bottom: 1px solid white;
+                }
+
+                .categoryMenu li:hover {
+                    cursor: pointer;
+                }
+
+                .categoryMenuActive {
+                    color: rgb(241, 100, 30);
+                    transition: all 0.2s;
+                }
+            }
+
+            .companyFilter {
+                .title {
+                    font-weight: 600;
+                    font-size: 30px;
+                }
+
+                .companyDropdown {
+                    margin-block: 20px;
+                    padding-inline-start: 10px;
+
+                    select {
+                        padding: 5px;
+                        font-weight: 500;
+                        outline: 0;
+                        border-radius: 4px;
+                    }
+
+                    select:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .clearFilters {
+
+                .clearFilterButton {
+                    font-size: 18px;
+                    font-weight: 500;
+                    color: white;
+                    background-color: rgb(241, 100, 30);
+                    width: 50%;
+                    padding: 10px;
+                    margin-block: 40px;
+                    text-align: center;
+                    border: 1px solid white;
+                }
+
+                .clearFilterButton:hover {
+                    color: rgb(241, 100, 30);
+                    background-color: white;
+                    border: 1px solid rgb(241, 100, 30);
+                    transition: all 0.3s;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .productsRight {
+            width: 70%;
+
+            @include xsm {
+                width: 100%;
+            }
+
+            .productsFilterRight {
+                margin-block-end: 40px;
+                display: flex;
+                justify-content: space-between;
+
+                @include xsm {
+                    display: none;
+                }
+
+                @include sm {
+                    display: none;
+                }
+
+                .layoutSwitchButtons {
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+
+                    .layoutButton {
+                        svg {
+                            padding: 10px;
+                            background-color: rgba(0, 0, 0, 0.09);
+                            border-radius: 3px;
+                        }
+
+                        svg:hover {
+                            cursor: pointer;
+                        }
+                    }
+
+                    .backgroundColor {
+                        svg {
+                            background-color: rgba(0, 0, 0, 0.3);
+                        }
+                    }
+                }
+
+                .productsQuantity {
+                    color: rgba(0, 0, 0, 0.6);
+                    font-weight: 500;
+                    font-size: 13px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .filterDropdown {
+                    font-size: 14px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    form {
+                        select {
+                            padding: 5px;
+                            font-weight: 500;
+                            color: rgba(0, 0, 0, 0.6);
+                            border: 1px solid rgba(0, 0, 0, 0.6);
+                            outline: 0;
+                            border-radius: 4px;
+                        }
+
+                        select:hover {
+                            cursor: pointer;
+                        }
+                    }
+
+                }
+
+            }
+
+            .productsContainerGridLayout {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+
+                @include xsm {
+                    gap: 10px;
+                }
+
+                .productsItemGridLayout {
+                    width: 30%;
+
+                    .prodcutContainer {
+                        @include xsm {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+
+                            .productImage {
+                                @include xsm {
+                                    margin: 0 auto;
+                                }
+                            }
+                        }
+                    }
+
+                    @include xsm {
+                        width: 100%;
+                        border: 1px solid rgba(0, 0, 0, 0.3);
+                        border-radius: 10px;
+                    }
+                }
+
+                .productsItemGridLayout:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .productsContainerListLayout {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                .productsItemListLayout {
+                    border: 1px solid rgba(0, 0, 0, 0.09);
+                }
+
+                .productsItemListLayout:hover {
+                    cursor: pointer;
+                }
+
+                .prodcutContainer {
+                    display: flex;
+                    justify-content: space-evenly;
+                    align-items: center;
+
+                    .productImage {
+                        width: 200px;
+                    }
+
+                    .productDetails {
+                        display: flex;
+                        flex-direction: column;
+                        width: 60%;
+                        gap: 10px;
+
+                        .productDescription {
+                            font-size: 14px;
+                            color: rgba(0, 0, 0, 0.5);
+                            font-weight: 500;
+                            overflow: hidden;
+                        }
+
+                        .productLinkButton {
+                            border: 1px solid rgb(241, 100, 30);
+                            font-weight: 500;
+                            font-size: 18px;
+                            padding: 10px;
+                            color: rgb(241, 100, 30);
+                            width: 40%;
+                            text-align: center;
+                        }
+
+                        .productLinkButton:hover {
+                            background-color: rgb(241, 100, 30);
+                            color: white;
+                            transition: all 0.3s;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
