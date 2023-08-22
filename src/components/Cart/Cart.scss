@@ -1,0 +1,373 @@
+@import "../../css-config/mixins.scss";
+
+.cartSection {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 60px 30px;
+
+    @include xsm {
+        width: 80%;
+        padding-inline: 10px;
+    }
+
+    @include sm {
+        width: 80%;
+    }
+
+    @include md {
+        width: 80%;
+    }
+
+    .cartContent {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .cartHeadings {
+            display: flex;
+            padding-block-end: 40px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+
+            @include xsm {
+                gap: 30px;
+                font-size: 10px;
+            }
+
+            .item,
+            .price,
+            .quantity,
+            .subtotal,
+            .remove {
+                width: 200px;
+                text-align: center;
+                font-weight: 500;
+                color: rgba(0, 0, 0, 0.7);
+
+                @include xsm {
+                    width: 18%;
+                }
+
+                @include sm {
+                    width: 25%;
+                }
+
+                @include md {
+                    width: 25%;
+                }
+            }
+        }
+
+        .cartContainer {
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+
+            .cartProductsContainer {
+                display: flex;
+                padding-block-end: 10px;
+
+                @include xsm {
+                    font-size: 10px;
+                    gap: 30px;
+                    justify-content: space-between;
+                }
+
+                .cartPrice,
+                .cartQuantity,
+                .cartSubtotal,
+                .cartRemove {
+                    width: 200px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    @include xsm {
+                        width: 18%;
+                    }
+
+                    @include sm {
+                        width: 25%;
+                    }
+
+                    @include md {
+                        width: 25%;
+                    }
+                }
+
+                .cartItem {
+                    display: flex;
+                    width: 200px;
+                    align-items: center;
+                    gap: 20px;
+
+                    @include xsm {
+                        gap: 5px;
+                        width: 18%;
+                        flex-direction: column;
+                    }
+
+                    @include sm {
+                        gap: 5px;
+                        width: 25%;
+                        flex-direction: column;
+                    }
+
+                    @include md {
+                        gap: 5px;
+                        width: 25%;
+                        flex-direction: column;
+                    }
+
+                    .cartProductImage {
+                        width: 70px;
+                        height: 50px;
+
+                        @include xsm {
+                            width: 50px;
+                            height: 40px;
+                        }
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+
+                    .cartProductName {
+                        font-size: 14px;
+
+                        @include xsm {
+                            font-size: 10px;
+                        }
+                    }
+                }
+
+                .cartQuantity {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .cartDecrementButton,
+                    .cartIncrementButton {
+                        padding: 5px;
+                        text-align: center;
+                        width: 20px;
+                        background-color: rgba(0, 0, 0, 0.04);
+
+                        @include xsm {
+                            width: 10px;
+                        }
+
+                        svg {
+                            font-size: 14px;
+
+                            @include xsm {
+                                font-size: 10px;
+                            }
+                        }
+                    }
+
+                    .cartDecrementButton:hover,
+                    .cartIncrementButton:hover {
+                        cursor: pointer;
+                    }
+
+                    .cartDecrementButton {
+                        border: 1px solid rgba(0, 0, 0, 0.04);
+                        border-right: 0;
+                    }
+
+                    .cartIncrementButton {
+                        border: 1px solid rgba(0, 0, 0, 0.04);
+                        border-left: 0;
+                    }
+
+                    .cartValue {
+                        width: 50px;
+                        text-align: center;
+                        padding: 5px;
+                        font-weight: 500;
+                        border: 1px solid rgba(0, 0, 0, 0.04);
+                        border-inline: 0;
+                    }
+                }
+
+                .cartRemove {
+                    color: red;
+
+                    svg:hover {
+                        transform: scaleY(1.2);
+                        cursor: pointer;
+                        transition: all 0.3s;
+                    }
+                }
+            }
+        }
+
+        .cartNoItemContainer {
+            .cartNoItemHeading {
+                text-align: center;
+                font-size: 40px;
+                font-weight: 500;
+                color: rgba(0, 0, 0, 0.5);
+
+                @include xsm {
+                    font-size: 20px;
+                }
+            }
+
+            .cartNoItemButton {
+                border: 1px solid white;
+                padding: 20px;
+                text-align: center;
+                font-weight: 500;
+                width: 20%;
+                background-color: #f1641e;
+                color: white;
+                margin: 60px auto;
+                font-size: 20px;
+
+                @include xsm {
+                    font-size: 14px;
+                    padding: 10px;
+                    width: 30%;
+                    margin: 20px auto;
+                }
+            }
+
+            .cartNoItemButton:hover {
+                color: #f1641e;
+                background-color: white;
+                border: 1px solid #f1641e;
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+        }
+
+        .cartButtons {
+            display: flex;
+            justify-content: space-between;
+            padding-block: 10px;
+
+            @include xsm {
+                justify-content: space-evenly;
+            }
+
+            .continueShoppingButton,
+            .clearCartButton {
+                border: 1px solid white;
+                padding: 20px;
+                font-weight: 500;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+
+                @include xsm {
+                    font-size: 10px;
+                    padding: 10px;
+                }
+            }
+
+            .continueShoppingButton:hover,
+            .clearCartButton:hover {
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+
+            .continueShoppingButton {
+                width: 20%;
+                background-color: #f1641e;
+                color: white;
+            }
+
+            .continueShoppingButton:hover {
+                color: #f1641e;
+                background-color: white;
+                border: 1px solid #f1641e;
+            }
+
+            .clearCartButton {
+                width: 10%;
+                color: white;
+                background-color: red;
+
+                @include xsm {
+                    width: 20%;
+                }
+            }
+
+            .clearCartButton:hover {
+                color: red;
+                background-color: white;
+                border: 1px solid red;
+            }
+        }
+
+        .cartBill {
+            padding: 30px;
+            display: flex;
+            gap: 40px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            background-color: rgba(0, 0, 0, 0.04);
+            width: 30%;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+
+            @include xsm {
+                width: 80%;
+            }
+
+            @include sm {
+                width: 80%;
+            }
+
+            @include md {
+                width: 80%;
+            }
+
+            .cartBillHeadings {
+                .billHeadingContainer {
+                    padding-block-end: 10px;
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+                }
+
+                .billText {
+                    margin-block: 5px;
+                    font-weight: 500;
+                    color: rgba(0, 0, 0, 0.5);
+
+                    @include xsm {
+                        font-size: 12px;
+                    }
+                }
+
+                .totalAmount {
+                    color: black;
+                }
+            }
+
+            .cartBillPrices {
+                .billPricesContainer {
+                    padding-block-end: 10px;
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+                }
+
+                .billPrices {
+                    font-weight: 500;
+                    margin-block: 5px;
+                    color: rgba(0, 0, 0, 0.5);
+
+                    @include xsm {
+                        font-size: 12px;
+                    }
+                }
+
+                .totalAmount {
+                    color: black;
+                }
+            }
+        }
+    }
+}

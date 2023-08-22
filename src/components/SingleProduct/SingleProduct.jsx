@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./SingleProduct.scss"
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from "axios"
 import { TbTruckDelivery, TbReplace } from "react-icons/tb"
 import { BsShieldShaded, BsStarHalf } from "react-icons/bs"
 import { AiOutlineLeft, AiOutlineRight, AiOutlineStar, AiFillStar, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"
+import { AppContext } from '../../utils/Context'
 
 export default function SingleProduct() {
 
@@ -12,11 +13,12 @@ export default function SingleProduct() {
 
     const navigate = useNavigate();
 
+    const { handleAddToCart, handleDecrement, handleIncrement, cartItemQuantity } = useContext(AppContext);
+
     const [singleProductDetails, setSingleProductDetails] = useState({});
     const [mainImage, setMainImage] = useState({});
     const [showSwipeButtons, setShowSwipeButtons] = useState(false)
     const [activeIndex, setActiveIndex] = useState(0);
-    const [cartQuantity, setCartQuantity] = useState(1)
 
     const API = `https://api.pujakaitem.com/api/products/${productId.id}`
 
@@ -59,19 +61,6 @@ export default function SingleProduct() {
         const newIndex = activeIndex === singleProductDetails.image.length - 1 ? 0 : activeIndex + 1;
         setActiveIndex(newIndex);
     };
-
-    const handleDecrement = () => {
-        const quantity = cartQuantity;
-        if (cartQuantity > 1) {
-            setCartQuantity(quantity - 1)
-        }
-    }
-    const handleIncrement = () => {
-        const quantity = cartQuantity;
-        if (cartQuantity < 5) {
-            setCartQuantity(quantity + 1)
-        }
-    }
 
     return (
         <div className='singleProductSection'>
@@ -181,12 +170,13 @@ export default function SingleProduct() {
                         <div className="singleProductCartSection">
                             <div className="counters">
                                 <span className="counter leftCounter" onClick={handleDecrement}><AiOutlineMinus /></span>
-                                <span className="value">{cartQuantity}</span>
+                                <span className="value">{cartItemQuantity}</span>
                                 <span className="counter rightCounter" onClick={handleIncrement}><AiOutlinePlus /></span>
                             </div>
                             <div className="cartButton" onClick={() => {
                                 navigate('/cart')
                                 window.scrollTo({ top: 0, behavior: 'smooth' })
+                                handleAddToCart(singleProductDetails, cartItemQuantity)
                             }}>
                                 ADD TO CART
                             </div>
