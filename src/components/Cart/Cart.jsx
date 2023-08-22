@@ -11,7 +11,7 @@ export default function Cart() {
 
     const navigate = useNavigate();
 
-    const { cartProductData, handleCartProductQuantity, handleRemoveFromCart, handleClearCart } = useContext(AppContext);
+    const { cartProductData, handleCartProductQuantity, handleRemoveFromCart, handleClearCart, cartIconQuantity, setCartIconQuantity } = useContext(AppContext);
 
     const [cartSubtotal, setCartSubtotal] = useState(0);
     const [cartTotal, setCartTotal] = useState(0);
@@ -41,6 +41,12 @@ export default function Cart() {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
+
+    useEffect(() => {
+        const quantity = cartProductData.length
+        setCartIconQuantity(quantity)
+        console.log(quantity)
+    }, [cartProductData, setCartIconQuantity, cartIconQuantity])
 
     return (
         <div className='cartSection'>

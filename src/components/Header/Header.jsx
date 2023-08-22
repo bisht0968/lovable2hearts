@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./Header.scss"
 import { BiSolidUser, BiSearchAlt2 } from "react-icons/bi"
 import { BsCartFill } from "react-icons/bs"
 import { useNavigate } from 'react-router-dom'
 import { GiHamburgerMenu } from "react-icons/gi"
 import { RxCross2 } from "react-icons/rx"
+import { AppContext } from '../../utils/Context'
 
 export default function Header() {
+
+    const { cartIconQuantity } = useContext(AppContext)
 
     const navigate = useNavigate();
 
@@ -69,7 +72,11 @@ export default function Header() {
                                 window.scrollTo({ top: 0, behavior: 'smooth' })
                             }}>
                                 <BsCartFill />
-                                <span className="cartItemsCount">0</span>
+                                {cartIconQuantity > 0 ?
+                                    <span className="cartItemsCount">
+                                        {cartIconQuantity}
+                                    </span> : ""
+                                }
                             </div>
                         </div>
                         <div className="mobileMenu">
@@ -113,7 +120,11 @@ export default function Header() {
                                             window.scrollTo({ top: 0, behavior: 'smooth' })
                                             setShowMenu(false)
                                         }}>   <BsCartFill />
-                                            <span className="cartItemsCount">0</span>
+                                            {cartIconQuantity > 0 ?
+                                                <span className="cartItemsCount">
+                                                    {cartIconQuantity}
+                                                </span> : ""
+                                            }
                                         </div>
                                     </li>
                                 </ul>

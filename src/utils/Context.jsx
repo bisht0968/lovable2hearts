@@ -7,6 +7,7 @@ const AppProvider = ({ children }) => {
 
     const [cartProductData, setCartProductData] = useState([])
     const [cartItemQuantity, setCartItemQuantity] = useState(1);
+    const [cartIconQuantity, setCartIconQuantity] = useState(0)
 
     const handleDecrement = () => {
         const quantity = cartItemQuantity;
@@ -70,7 +71,9 @@ const AppProvider = ({ children }) => {
         handleIncrement,
         handleCartProductQuantity,
         handleRemoveFromCart,
-        handleClearCart
+        handleClearCart,
+        cartIconQuantity,
+        setCartIconQuantity
     }}>{children}</AppContext.Provider>
 }
 
