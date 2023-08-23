@@ -109,31 +109,78 @@
                 }
             }
 
-            .bannerButton {
-                border: 2px solid rgba(0, 0, 0, 0.7);
-                width: 20%;
-                padding: 10px;
-                border-radius: 10px;
-                text-align: center;
-                font-weight: 600;
-                color: black;
+            .bannerButtons {
+                .bannerButton {
+                    border: 2px solid rgba(0, 0, 0, 0.7);
+                    width: 20%;
+                    padding: 10px;
+                    border-radius: 10px;
+                    text-align: center;
+                    font-weight: 600;
+                    color: black;
 
-                @include xsm {
-                    width: 50%;
-                    margin: 0 auto;
+                    @include xsm {
+                        width: 50%;
+                        margin: 0 auto;
+                    }
+
+                    @include sm {
+                        width: 20%;
+                        margin: 0 auto;
+                    }
                 }
 
-                @include sm {
-                    width: 20%;
-                    margin: 0 auto;
+                .bannerButton:hover {
+                    cursor: pointer;
+                    color: #f1641e;
+                    transition: all 0.3s;
+                    border: 2px solid #f1641e;
+                }
+
+                .genderButton {
+                    display: flex;
+                    position: relative;
+                    justify-content: center;
+                    overflow: hidden;
+
+                    .bannerButtonText {
+                        z-index: 10;
+                    }
+
+                    .bannerButtonImage {
+                        position: absolute;
+                        top: 0;
+                        left: -5px;
+                        opacity: 0.4;
+                        height: 100%;
+                        width: 110%;
+
+                        img {
+                            border-radius: 10px;
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                }
+
+                .genderButton:hover {
+                    border: 2px solid red;
+                    color: red;
+
+                    img {
+                        opacity: 0.3;
+                    }
                 }
             }
 
-            .bannerButton:hover {
-                cursor: pointer;
-                color: #f1641e;
-                transition: all 0.3s;
-                border: 2px solid #f1641e;
+            .genderBannerButtons {
+                display: flex;
+                justify-content: space-evenly;
+
+                @include xsm {
+                    flex-wrap: wrap;
+                    gap: 10px;
+                }
             }
         }
     }

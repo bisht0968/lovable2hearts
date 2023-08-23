@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import "./FeatureProducts.scss"
-import Product from "../Products/Product/Product"
 import axios from "axios"
+
+import "./FeatureProducts.scss"
+
+import Product from "../Products/Product/Product"
+
 import { FaSpinner } from "react-icons/fa"
 
 export default function FeatureProducts() {

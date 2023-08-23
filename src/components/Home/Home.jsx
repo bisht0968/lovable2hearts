@@ -1,5 +1,7 @@
 import React from 'react'
+
 import "./Home.scss"
+
 import Banner from "../Banner/Banner"
 import Services from '../Services/Services'
 import FeatureProducts from '../FeatureProducts/FeatureProducts'

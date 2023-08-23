@@ -1,5 +1,7 @@
 import React from 'react'
+
 import "./Contact.scss"
+
 import ContactMap from "../../assets/Map Contact Us.png"
 
 export default function Contact() {

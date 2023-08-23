@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../utils/Context';
+import { useNavigate } from 'react-router-dom';
+
 import "./Cart.scss"
 
 import { FaTrash } from "react-icons/fa"
-import { useNavigate } from 'react-router-dom';
-
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"
 
 export default function Cart() {
@@ -45,7 +45,6 @@ export default function Cart() {
     useEffect(() => {
         const quantity = cartProductData.length
         setCartIconQuantity(quantity)
-        console.log(quantity)
     }, [cartProductData, setCartIconQuantity, cartIconQuantity])
 
     return (

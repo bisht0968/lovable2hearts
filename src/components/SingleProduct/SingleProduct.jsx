@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
-import "./SingleProduct.scss"
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from "axios"
+
+import "./SingleProduct.scss"
+
+import { AppContext } from '../../utils/Context'
+
 import { TbTruckDelivery, TbReplace } from "react-icons/tb"
 import { BsShieldShaded, BsStarHalf } from "react-icons/bs"
 import { AiOutlineLeft, AiOutlineRight, AiOutlineStar, AiFillStar, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"
-import { AppContext } from '../../utils/Context'
 
 export default function SingleProduct() {
 
@@ -13,7 +16,7 @@ export default function SingleProduct() {
 
     const navigate = useNavigate();
 
-    const { handleAddToCart, handleDecrement, handleIncrement, cartItemQuantity } = useContext(AppContext);
+    const { handleAddToCart, handleDecrement, handleIncrement, cartItemQuantity, productItemQuantity, setProductItemQuantity } = useContext(AppContext);
 
     const [singleProductDetails, setSingleProductDetails] = useState({});
     const [mainImage, setMainImage] = useState({});
@@ -61,6 +64,10 @@ export default function SingleProduct() {
         const newIndex = activeIndex === singleProductDetails.image.length - 1 ? 0 : activeIndex + 1;
         setActiveIndex(newIndex);
     };
+
+    useEffect(() => {
+        setProductItemQuantity(1)
+    }, [])
 
     return (
         <div className='singleProductSection'>
@@ -170,8 +177,8 @@ export default function SingleProduct() {
                         <div className="singleProductCartSection">
                             <div className="counters">
                                 <span className="counter leftCounter" onClick={handleDecrement}><AiOutlineMinus /></span>
-                                <span className="value">{cartItemQuantity}</span>
-                                <span className="counter rightCounter" onClick={handleIncrement}><AiOutlinePlus /></span>
+                                <span className="value">{productItemQuantity}</span>
+                                <span className="counter rightCounter" onClick={() => handleIncrement(singleProductDetails)}><AiOutlinePlus /></span>
                             </div>
                             <div className="cartButton" onClick={() => {
                                 navigate('/cart')

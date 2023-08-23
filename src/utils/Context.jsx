@@ -2,24 +2,27 @@ import { createContext, useState } from "react";
 
 const AppContext = createContext();
 
-
 const AppProvider = ({ children }) => {
 
     const [cartProductData, setCartProductData] = useState([])
     const [cartItemQuantity, setCartItemQuantity] = useState(1);
     const [cartIconQuantity, setCartIconQuantity] = useState(0)
+    const [productItemQuantity, setProductItemQuantity] = useState(1);
+    const [pageSelect, setPageSelect] = useState("lgbtq");
 
     const handleDecrement = () => {
-        const quantity = cartItemQuantity;
-        if (cartItemQuantity > 1) {
+        const quantity = productItemQuantity;
+        if (productItemQuantity > 1) {
             setCartItemQuantity(quantity - 1)
+            setProductItemQuantity(quantity - 1)
         }
     }
 
-    const handleIncrement = () => {
-        const quantity = cartItemQuantity;
-        if (cartItemQuantity < 5) {
+    const handleIncrement = (product) => {
+        const quantity = productItemQuantity;
+        if (productItemQuantity <= product.stock) {
             setCartItemQuantity(quantity + 1)
+            setProductItemQuantity(quantity + 1)
         }
     }
 
@@ -27,13 +30,15 @@ const AppProvider = ({ children }) => {
         let items = [...cartProductData];
         let index = items.findIndex(p => p.id === product.id);
         if (index !== -1) {
-            items[index].quantity += quantity;
+            if (items[index].quantity <= product.stock)
+                items[index].quantity += quantity;
         } else {
             product.quantity = quantity;
             items = [...items, product]
         }
         setCartProductData(items)
     }
+
     const handleRemoveFromCart = (product) => {
         let items = [...cartProductData];
         items = items.filter(p => p.id !== product.id);
@@ -62,6 +67,12 @@ const AppProvider = ({ children }) => {
         setCartProductData([])
     }
 
+    const handleGenderPage = () => {
+        console.log(pageSelect)
+        if (pageSelect === "straight") setPageSelect("lgbtq")
+        else setPageSelect("straight")
+    }
+
     return <AppContext.Provider value={{
         handleAddToCart,
         cartProductData,
@@ -73,7 +84,12 @@ const AppProvider = ({ children }) => {
         handleRemoveFromCart,
         handleClearCart,
         cartIconQuantity,
-        setCartIconQuantity
+        setCartIconQuantity,
+        productItemQuantity,
+        setProductItemQuantity,
+        pageSelect,
+        handleGenderPage,
+        setPageSelect
     }}>{children}</AppContext.Provider>
 }
 

@@ -1,15 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
+
 import "./Header.scss"
+import { AppContext } from '../../utils/Context'
+
 import { BiSolidUser, BiSearchAlt2 } from "react-icons/bi"
 import { BsCartFill } from "react-icons/bs"
 import { useNavigate } from 'react-router-dom'
 import { GiHamburgerMenu } from "react-icons/gi"
 import { RxCross2 } from "react-icons/rx"
-import { AppContext } from '../../utils/Context'
+import { IoMdTransgender } from "react-icons/io"
+import { GiLovers } from "react-icons/gi"
 
 export default function Header() {
 
-    const { cartIconQuantity } = useContext(AppContext)
+    const { cartIconQuantity, pageSelect, handleGenderPage } = useContext(AppContext)
 
     const navigate = useNavigate();
 
@@ -60,6 +64,19 @@ export default function Header() {
                                 window.scrollTo({ top: 0, behavior: 'smooth' })
                             }}>CONTACT</li>
                         </ul>
+                        <div className="headerGenderSwitch" onClick={() => handleGenderPage()}>
+                            {pageSelect === "lgbtq" ?
+                                <>
+                                    <span>Straight</span>
+                                    <span><GiLovers /></span>
+                                </>
+                                :
+                                <>
+                                    <span>lgbtq</span>
+                                    <span><IoMdTransgender /></span>
+                                </>
+                            }
+                        </div>
                         <div className="headerIcons">
                             <div className="headerUser">
                                 <BiSolidUser />

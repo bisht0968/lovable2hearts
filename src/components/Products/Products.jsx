@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 
 import "./Products.scss"
+
 import Product from "./Product/Product"
 
 import { BsFillGridFill, BsList, BsSearch } from "react-icons/bs"
@@ -21,9 +22,6 @@ export default function Products() {
     const [categoryMenuActivated, setCategoryMenuActivated] = useState("all");
     const [mobileLayout, setMobileLayout] = useState(true)
     const [showMobileFilter, setShowMobileFilter] = useState(false)
-    // const [minPrice, setMinPrice] = useState(0);
-    // const [maxPrice, setMaxPrice] = useState(0);
-    // const [price, setPrice] = useState(0);
 
     const getProductData = async (url) => {
         try {
@@ -115,42 +113,6 @@ export default function Products() {
             setFilteredProductData(filteredData)
         }
     }, [selectedCompnayCategory])
-
-
-    // const handlePriceFilterValue = (event) => {
-    //     const selectedPrice = parseInt(event.target.value);
-    //     setPrice(selectedPrice);
-
-    //     let filteredData;
-
-    //     if (filteredProductData.length > 0 && selectedPrice > maxPrice) {
-    //         filteredData = productData.filter(product => product.price <= selectedPrice);
-    //     } else {
-    //         filteredData = filteredProductData.length === 0
-    //             ? productData.filter(product => product.price <= selectedPrice)
-    //             : filteredProductData.filter(product => product.price <= selectedPrice);
-    //     }
-
-    //     setFilteredProductData(filteredData);
-    // };
-
-
-    // useEffect(() => {
-    //     let minimumPrice;
-    //     let maximumPrice;
-
-    //     const prices = filteredProductData.map(product => product.price);
-    //     maximumPrice = Math.max(...prices);
-    //     minimumPrice = Math.min(...prices);
-    //     setMaxPrice(maximumPrice);
-    //     setMinPrice(minimumPrice);
-
-    // }, [productData, filteredProductData])
-
-    // useEffect(() => {
-    //     console.log(minPrice, maxPrice)
-    //     setPrice(maxPrice)
-    // }, [maxPrice, minPrice]);
 
     const handleClearFilters = () => {
         setSelectedCompnayCategory("all")

@@ -1,5 +1,7 @@
 import React from 'react'
+
 import "./Footer.scss"
+
 import { AiOutlineInstagram, AiOutlineYoutube, AiOutlineGithub, AiOutlinePhone } from "react-icons/ai"
 import { BiLogoGmail } from "react-icons/bi"
 import { useNavigate } from "react-router-dom"

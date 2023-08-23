@@ -1,5 +1,7 @@
 import React from 'react'
+
 import "./Services.scss"
+
 import { LiaShippingFastSolid } from "react-icons/lia"
 import { FaShieldAlt } from "react-icons/fa"
 import { GiReceiveMoney } from "react-icons/gi"

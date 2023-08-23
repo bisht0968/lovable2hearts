@@ -155,6 +155,50 @@
                 transition: all 0.3s;
             }
 
+            .headerGenderSwitch {
+                border: 1px solid #f1641e;
+                padding: 5px 10px;
+                border-radius: 10px;
+                background-color: #f1641e;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-transform: uppercase;
+                width: 100px;
+                gap: 5px;
+
+                span {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+
+            .headerGenderSwitch:hover {
+                cursor: pointer;
+                border: 1px solid white;
+                background-color: #e5e5e5;
+                color: #f1641e;
+                transition: all 0.3s;
+
+                @include xsm {
+                    cursor: pointer;
+                    border: 1px solid #f1641e;
+                    background-color: #f1641e;
+                    color: white;
+                    transition: all 0.3s;
+                }
+
+                @include sm {
+                    cursor: pointer;
+                    border: 1px solid #f1641e;
+                    background-color: #f1641e;
+                    color: white;
+                    transition: all 0.3s;
+                }
+            }
+
             .headerIcons {
                 display: flex;
                 gap: 20px;

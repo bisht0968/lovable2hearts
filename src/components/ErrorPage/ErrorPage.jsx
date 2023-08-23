@@ -1,6 +1,8 @@
 import React from 'react'
-import "./ErrorPage.scss"
 import { useNavigate } from "react-router-dom"
+
+import "./ErrorPage.scss"
+
 import Pic from "../../assets/error_dog_png-removebg-preview.png"
 
 export default function ErrorPage() {
