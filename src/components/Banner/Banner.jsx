@@ -8,6 +8,7 @@ import "./Banner.scss"
 import { AppContext } from '../../utils/Context'
 
 import BannerImage from "../../assets/Home Banner.avif"
+import lgbqtBannerImage from "../../assets/lgbtq banner.jpg"
 import LGBTQ_SymbolPic from "../../assets/LGBTQ symbol.jpg"
 import coupleSymbolPic from "../../assets/couple symbol.jpg"
 
@@ -21,9 +22,14 @@ export default function Banner({ heading }) {
         <div className='bannerSection'>
             <div className="bannerContent">
                 <div className="bannerLeft">
-                    <div className="bannerImage">
-                        <img src={BannerImage} alt="" />
-                    </div>
+                    {pageSelect === "straight" ?
+                        <div className="bannerImage">
+                            <img src={BannerImage} alt="" />
+                        </div>
+                        :
+                        <div className="bannerImage">
+                            <img src={lgbqtBannerImage} alt="" />
+                        </div>}
                 </div>
                 <div className="bannerRight">
                     <div className="bannerText">

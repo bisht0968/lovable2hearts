@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from "axios"
 
 import "./FeatureProducts.scss"
@@ -6,18 +6,24 @@ import "./FeatureProducts.scss"
 import Product from "../Products/Product/Product"
 
 import { FaSpinner } from "react-icons/fa"
+import { AppContext } from '../../utils/Context'
 
 export default function FeatureProducts() {
 
     const [productData, setProductData] = useState([]);
+    const { pageSelect } = useContext(AppContext)
 
     const API = "https://api.pujakaitem.com/api/products"
 
     const getProductData = async (url) => {
         try {
-            const res = await axios.get(url)
-            const limitedData = res.data.slice(0, 3)
-            setProductData(limitedData)
+            if (pageSelect === "straight") {
+                const res = await axios.get(url)
+                const limitedData = res.data.slice(0, 3)
+                setProductData(limitedData)
+            } else {
+                setProductData([])
+            }
         } catch (error) {
             console.error('Error fetching products:', error);
         }
@@ -25,7 +31,7 @@ export default function FeatureProducts() {
 
     useEffect(() => {
         getProductData(API)
-    }, [])
+    }, [pageSelect])
 
     return (
         <div className='featureProdcutsSection'>

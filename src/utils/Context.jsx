@@ -1,14 +1,24 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
 
-    const [cartProductData, setCartProductData] = useState([])
+    const getLocalCartData = () => {
+        const localCartData = localStorage.getItem("LocalStorageCartData");
+
+        if (!localCartData || localCartData.length === 0) {
+            return [];
+        } else {
+            return JSON.parse(localCartData);
+        }
+    }
+
+    const [cartProductData, setCartProductData] = useState(getLocalCartData());
     const [cartItemQuantity, setCartItemQuantity] = useState(1);
     const [cartIconQuantity, setCartIconQuantity] = useState(0)
     const [productItemQuantity, setProductItemQuantity] = useState(1);
-    const [pageSelect, setPageSelect] = useState("lgbtq");
+    const [pageSelect, setPageSelect] = useState("straight");
 
     const handleDecrement = () => {
         const quantity = productItemQuantity;
@@ -68,10 +78,14 @@ const AppProvider = ({ children }) => {
     }
 
     const handleGenderPage = () => {
-        console.log(pageSelect)
         if (pageSelect === "straight") setPageSelect("lgbtq")
         else setPageSelect("straight")
     }
+
+    useEffect(() => {
+        localStorage.setItem("LocalStorageCartData", JSON.stringify(cartProductData));
+    }, [cartProductData]);
+
 
     return <AppContext.Provider value={{
         handleAddToCart,

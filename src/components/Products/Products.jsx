@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios';
 
 import "./Products.scss"
@@ -7,6 +7,7 @@ import Product from "./Product/Product"
 
 import { BsFillGridFill, BsList, BsSearch } from "react-icons/bs"
 import { RxCross2 } from "react-icons/rx"
+import { AppContext } from '../../utils/Context';
 
 export default function Products() {
 
@@ -22,12 +23,17 @@ export default function Products() {
     const [categoryMenuActivated, setCategoryMenuActivated] = useState("all");
     const [mobileLayout, setMobileLayout] = useState(true)
     const [showMobileFilter, setShowMobileFilter] = useState(false)
+    const { pageSelect } = useContext(AppContext)
 
     const getProductData = async (url) => {
         try {
-            const res = await axios.get(url)
-            const limitedData = res.data.slice(0, 12)
-            setProductData(limitedData)
+            if (pageSelect === "straight") {
+                const res = await axios.get(url)
+                const limitedData = res.data.slice(0, 12)
+                setProductData(limitedData)
+            } else {
+                setProductData([])
+            }
         } catch (error) {
             console.error('Error fetching products:', error);
         }
@@ -35,7 +41,7 @@ export default function Products() {
 
     useEffect(() => {
         getProductData(API)
-    }, [])
+    }, [pageSelect])
 
     const handleSorting = () => {
         const userSortedValue = document.getElementById("sort");
@@ -211,23 +217,7 @@ export default function Products() {
                             </div>
                         </div>
 
-                        {/* <div className="priceFilter">
-                            <div className="heading">
-                                Price
-                            </div>
-                            <div className="maxPriceValue" >
-                                {Intl.NumberFormat("en-IN", {
-                                    style: "currency",
-                                    currency: "INR",
-                                    maximumFractionDigits: 2
-                                }).format(price / 100)}
-                            </div>
-                            <div className="priceRangeDragger">
-                                <input type="range" step={1} min={minPrice} max={maxPrice} onChange={handlePriceFilterValue} value={price} />
-                            </div>
-                        </div> */}
-
-                        <div className="clearFilters">
+                        < div className="clearFilters">
                             <div className="clearFilterButton" onClick={handleClearFilters}>
                                 Clear Filters
                             </div>
@@ -395,7 +385,7 @@ export default function Products() {
                         </div>
                     )}
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }

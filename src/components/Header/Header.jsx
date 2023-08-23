@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { useAuth0 } from "@auth0/auth0-react";
 
 import "./Header.scss"
 import { AppContext } from '../../utils/Context'
@@ -12,6 +13,8 @@ import { IoMdTransgender } from "react-icons/io"
 import { GiLovers } from "react-icons/gi"
 
 export default function Header() {
+
+    const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
 
     const { cartIconQuantity, pageSelect, handleGenderPage } = useContext(AppContext)
 
@@ -77,10 +80,20 @@ export default function Header() {
                                 </>
                             }
                         </div>
+
                         <div className="headerIcons">
-                            <div className="headerUser">
-                                <BiSolidUser />
-                            </div>
+                            {isAuthenticated && <span className="userName">{user.name}</span>}
+                            {isAuthenticated ?
+                                <div className="headerUser">
+                                    <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+                                        Log Out
+                                    </button>
+                                </div>
+                                :
+                                <div className="headerUser">
+                                    <button onClick={() => loginWithRedirect()}>Log In</button>
+                                </div>
+                            }
                             <div className="headerSearch">
                                 <BiSearchAlt2 />
                             </div>
@@ -124,8 +137,16 @@ export default function Header() {
                                         setShowMenu(false)
                                     }}>CONTACT</li>
                                     <li className='mobileHeaderLogin'>
-                                        <span className='menuItemsIcon'><BiSolidUser /></span>
-                                        <span className="menuItemsText">Log in</span>
+                                        {isAuthenticated ?
+                                            <span className='menuItemsIcon'>
+                                                <button onClick={() => loginWithRedirect()}>Log Out</button>
+                                            </span>
+                                            :
+                                            <span className='menuItemsIcon'>
+                                                <button onClick={() => loginWithRedirect()}>Log In</button>
+                                                {isAuthenticated && <span className="userName">{user.name}</span>}
+                                            </span>
+                                        }
                                     </li>
                                     <li>
                                         <span>  <BiSearchAlt2 /></span>

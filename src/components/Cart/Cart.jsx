@@ -6,8 +6,11 @@ import "./Cart.scss"
 
 import { FaTrash } from "react-icons/fa"
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"
+import { useAuth0 } from '@auth0/auth0-react';
 
 export default function Cart() {
+
+    const { user, isAuthenticated } = useAuth0();
 
     const navigate = useNavigate();
 
@@ -50,6 +53,17 @@ export default function Cart() {
     return (
         <div className='cartSection'>
             <div className="cartContent">
+                {isAuthenticated ?
+                    <div className='cartUserInformation'>
+                        <div className="cartUserName">
+                            <div className="cartUserNameHeading">
+                                Welcome
+                            </div>
+                            {user.name}
+                        </div>
+                    </div>
+                    :
+                    ""}
                 <div className="cartHeadings">
                     <div className="item">
                         ITEM

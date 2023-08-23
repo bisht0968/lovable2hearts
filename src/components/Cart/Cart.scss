@@ -23,6 +23,20 @@
         flex-direction: column;
         gap: 10px;
 
+        .cartUserInformation {
+            margin-block-end: 20px;
+
+            .cartUserName {
+                font-weight: 400;
+                font-size: 14px;
+                text-transform: uppercase;
+
+                .cartUserNameHeading {
+                    font-weight: 500;
+                }
+            }
+        }
+
         .cartHeadings {
             display: flex;
             padding-block-end: 40px;
