@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 
 import './App.css';
 
@@ -11,12 +12,19 @@ import Cart from './components/Cart/Cart';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import Header from "./components/Header/Header"
 import Footer from './components/Footer/Footer';
+import PreferenceDialogueBox from "./components/PreferenceDialogueBox/PreferenceDialogueBox";
 
 function App() {
+
+  useEffect(() => {
+    document.title = 'Babsu Store - The only Store where you can buy for both';
+  }, []);
+
   return (
     <BrowserRouter>
       <Header />
       <Routes>
+        <Route path="/preference" element={<PreferenceDialogueBox />} />
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<Products />} />

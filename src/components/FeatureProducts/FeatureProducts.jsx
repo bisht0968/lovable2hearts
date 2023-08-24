@@ -11,13 +11,13 @@ import { AppContext } from '../../utils/Context'
 export default function FeatureProducts() {
 
     const [productData, setProductData] = useState([]);
-    const { pageSelect } = useContext(AppContext)
+    const { preference } = useContext(AppContext)
 
     const API = "https://api.pujakaitem.com/api/products"
 
     const getProductData = async (url) => {
         try {
-            if (pageSelect === "straight") {
+            if (preference === "straight") {
                 const res = await axios.get(url)
                 const limitedData = res.data.slice(0, 3)
                 setProductData(limitedData)
@@ -31,7 +31,7 @@ export default function FeatureProducts() {
 
     useEffect(() => {
         getProductData(API)
-    }, [pageSelect])
+    }, [preference])
 
     return (
         <div className='featureProdcutsSection'>

@@ -6,7 +6,6 @@ const AppProvider = ({ children }) => {
 
     const getLocalCartData = () => {
         const localCartData = localStorage.getItem("LocalStorageCartData");
-
         if (!localCartData || localCartData.length === 0) {
             return [];
         } else {
@@ -14,11 +13,23 @@ const AppProvider = ({ children }) => {
         }
     }
 
+    const getLocalPreferenceData = () => {
+        const localPreferenceData = localStorage.getItem("LocalPreferenceData");
+        console.log(localPreferenceData, "okay")
+        if (localPreferenceData === "") {
+            return "straight";
+        } else if (localPreferenceData === "straight") {
+            return "straight";
+        } else {
+            return "lgbtq";
+        }
+    }
+
     const [cartProductData, setCartProductData] = useState(getLocalCartData());
     const [cartItemQuantity, setCartItemQuantity] = useState(1);
     const [cartIconQuantity, setCartIconQuantity] = useState(0)
     const [productItemQuantity, setProductItemQuantity] = useState(1);
-    const [pageSelect, setPageSelect] = useState("straight");
+    const [preference, setPreference] = useState(getLocalPreferenceData());
 
     const handleDecrement = () => {
         const quantity = productItemQuantity;
@@ -77,15 +88,13 @@ const AppProvider = ({ children }) => {
         setCartProductData([])
     }
 
-    const handleGenderPage = () => {
-        if (pageSelect === "straight") setPageSelect("lgbtq")
-        else setPageSelect("straight")
-    }
-
     useEffect(() => {
         localStorage.setItem("LocalStorageCartData", JSON.stringify(cartProductData));
     }, [cartProductData]);
 
+    useEffect(() => {
+        localStorage.setItem("LocalPreferenceData", preference);
+    }, [preference]);
 
     return <AppContext.Provider value={{
         handleAddToCart,
@@ -101,9 +110,8 @@ const AppProvider = ({ children }) => {
         setCartIconQuantity,
         productItemQuantity,
         setProductItemQuantity,
-        pageSelect,
-        handleGenderPage,
-        setPageSelect
+        setPreference,
+        preference
     }}>{children}</AppContext.Provider>
 }
 

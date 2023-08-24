@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import "./Header.scss"
 import { AppContext } from '../../utils/Context'
 
-import { BiSolidUser, BiSearchAlt2 } from "react-icons/bi"
+import { BiSearchAlt2 } from "react-icons/bi"
 import { BsCartFill } from "react-icons/bs"
 import { useNavigate } from 'react-router-dom'
 import { GiHamburgerMenu } from "react-icons/gi"
@@ -16,7 +16,7 @@ export default function Header() {
 
     const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
 
-    const { cartIconQuantity, pageSelect, handleGenderPage } = useContext(AppContext)
+    const { cartIconQuantity } = useContext(AppContext)
 
     const navigate = useNavigate();
 
@@ -67,20 +67,6 @@ export default function Header() {
                                 window.scrollTo({ top: 0, behavior: 'smooth' })
                             }}>CONTACT</li>
                         </ul>
-                        <div className="headerGenderSwitch" onClick={() => handleGenderPage()}>
-                            {pageSelect === "lgbtq" ?
-                                <>
-                                    <span>Straight</span>
-                                    <span><GiLovers /></span>
-                                </>
-                                :
-                                <>
-                                    <span>lgbtq</span>
-                                    <span><IoMdTransgender /></span>
-                                </>
-                            }
-                        </div>
-
                         <div className="headerIcons">
                             {isAuthenticated && <span className="userName">{user.name}</span>}
                             {isAuthenticated ?

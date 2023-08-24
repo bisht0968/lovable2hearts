@@ -1,20 +1,11 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { IoMdTransgender } from "react-icons/io"
-import { GiLovers } from "react-icons/gi"
-
 import "./Banner.scss"
-import { AppContext } from '../../utils/Context'
 
 import BannerImage from "../../assets/Home Banner.avif"
-import lgbqtBannerImage from "../../assets/lgbtq banner.jpg"
-import LGBTQ_SymbolPic from "../../assets/LGBTQ symbol.jpg"
-import coupleSymbolPic from "../../assets/couple symbol.jpg"
 
 export default function Banner({ heading }) {
-
-    const { pageSelect, handleGenderPage, setPageSelect } = useContext(AppContext)
 
     const navigate = useNavigate()
 
@@ -22,14 +13,9 @@ export default function Banner({ heading }) {
         <div className='bannerSection'>
             <div className="bannerContent">
                 <div className="bannerLeft">
-                    {pageSelect === "straight" ?
-                        <div className="bannerImage">
-                            <img src={BannerImage} alt="" />
-                        </div>
-                        :
-                        <div className="bannerImage">
-                            <img src={lgbqtBannerImage} alt="" />
-                        </div>}
+                    <div className="bannerImage">
+                        <img src={BannerImage} alt="" />
+                    </div>
                 </div>
                 <div className="bannerRight">
                     <div className="bannerText">
@@ -52,33 +38,6 @@ export default function Banner({ heading }) {
                         }}>
                             Shop Now
                         </div>
-                        {pageSelect === "straight" ?
-                            <div className="bannerButton genderButton" onClick={() => {
-                                handleGenderPage()
-                                setPageSelect("lgbtq")
-                                window.scrollTo({ top: 0, behavior: 'smooth' })
-                            }}>
-                                <div className="bannerButtonText">
-                                    <IoMdTransgender /> LGBTQ
-                                </div>
-                                <div className="bannerButtonImage">
-                                    <img src={LGBTQ_SymbolPic} alt="" />
-                                </div>
-                            </div>
-                            :
-                            <div className="bannerButton genderButton" onClick={() => {
-                                handleGenderPage()
-                                setPageSelect("straight")
-                                window.scrollTo({ top: 0, behavior: 'smooth' })
-                            }}>
-                                <div className="bannerButtonText">
-                                    <GiLovers />Straight
-                                </div>
-                                <div className="bannerButtonImage">
-                                    <img src={coupleSymbolPic} alt="" />
-                                </div>
-                            </div>
-                        }
                     </div>
                 </div>
             </div>

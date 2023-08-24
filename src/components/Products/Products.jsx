@@ -18,16 +18,15 @@ export default function Products() {
     const [gridLayout, setGridLayout] = useState(true);
     const [sortedValue, setSortedValue] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
-    const [selectedCompnayCategory, setSelectedCompnayCategory] = useState("");
     const [text, setText] = useState("");
     const [categoryMenuActivated, setCategoryMenuActivated] = useState("all");
     const [mobileLayout, setMobileLayout] = useState(true)
     const [showMobileFilter, setShowMobileFilter] = useState(false)
-    const { pageSelect } = useContext(AppContext)
+    const { preference } = useContext(AppContext)
 
     const getProductData = async (url) => {
         try {
-            if (pageSelect === "straight") {
+            if (preference === "straight") {
                 const res = await axios.get(url)
                 const limitedData = res.data.slice(0, 12)
                 setProductData(limitedData)
@@ -41,7 +40,7 @@ export default function Products() {
 
     useEffect(() => {
         getProductData(API)
-    }, [pageSelect])
+    }, [preference])
 
     const handleSorting = () => {
         const userSortedValue = document.getElementById("sort");
@@ -104,24 +103,7 @@ export default function Products() {
         }
     }, [text])
 
-    const handleCompanySorting = () => {
-        const userSortedCompanyValue = document.getElementById("companySort");
-        const sortedCompanyValue = userSortedCompanyValue.options[userSortedCompanyValue.selectedIndex].value;
-        setSelectedCompnayCategory(sortedCompanyValue)
-    }
-
-    useEffect(() => {
-        if (selectedCompnayCategory === "all") {
-            setFilteredProductData([])
-            getProductData(API)
-        } else {
-            const filteredData = productData.filter(product => product.company === selectedCompnayCategory);
-            setFilteredProductData(filteredData)
-        }
-    }, [selectedCompnayCategory])
-
     const handleClearFilters = () => {
-        setSelectedCompnayCategory("all")
         setText("")
         setSelectedCategory("")
         setSortedValue("")
@@ -201,22 +183,6 @@ export default function Products() {
                                 </li>
                             </ul>
                         </div>
-                        <div className="companyFilter">
-                            <div className="title">
-                                Company
-                            </div>
-                            <div className="companyDropdown">
-                                <form action="#">
-                                    <select name="companySort" id="companySort" onChange={handleCompanySorting} value={selectedCompnayCategory} >
-                                        <option value="all">All</option>
-                                        {productData.map(data => (
-                                            <option value={data.company} key={data.id} >{data.company}</option>
-                                        ))}
-                                    </select>
-                                </form>
-                            </div>
-                        </div>
-
                         < div className="clearFilters">
                             <div className="clearFilterButton" onClick={handleClearFilters}>
                                 Clear Filters
@@ -295,21 +261,6 @@ export default function Products() {
                                             Watch
                                         </li>
                                     </ul>
-                                </div>
-                                <div className="companyFilter">
-                                    <div className="title">
-                                        Company
-                                    </div>
-                                    <div className="companyDropdown">
-                                        <form action="#">
-                                            <select name="companySort" id="companySort" onChange={handleCompanySorting} value={selectedCompnayCategory} >
-                                                <option value="all">All</option>
-                                                {productData.map(data => (
-                                                    <option value={data.company} key={data.id} >{data.company}</option>
-                                                ))}
-                                            </select>
-                                        </form>
-                                    </div>
                                 </div>
                                 <div className="clearFilters">
                                     <div className="clearFilterButton" onClick={handleClearFilters}>
