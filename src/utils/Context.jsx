@@ -4,6 +4,8 @@ const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
 
+    const heading = "Lovable2Hearts"
+
     const getLocalCartData = () => {
         const localCartData = localStorage.getItem("LocalStorageCartData");
         if (!localCartData || localCartData.length === 0) {
@@ -15,7 +17,6 @@ const AppProvider = ({ children }) => {
 
     const getLocalPreferenceData = () => {
         const localPreferenceData = localStorage.getItem("LocalPreferenceData");
-        console.log(localPreferenceData, "okay")
         if (localPreferenceData === "") {
             return "straight";
         } else if (localPreferenceData === "straight") {
@@ -30,6 +31,7 @@ const AppProvider = ({ children }) => {
     const [cartIconQuantity, setCartIconQuantity] = useState(0)
     const [productItemQuantity, setProductItemQuantity] = useState(1);
     const [preference, setPreference] = useState(getLocalPreferenceData());
+    const [showHeader, setShowHeader] = useState(true)
 
     const handleDecrement = () => {
         const quantity = productItemQuantity;
@@ -97,6 +99,7 @@ const AppProvider = ({ children }) => {
     }, [preference]);
 
     return <AppContext.Provider value={{
+        heading,
         handleAddToCart,
         cartProductData,
         cartItemQuantity,
@@ -111,7 +114,9 @@ const AppProvider = ({ children }) => {
         productItemQuantity,
         setProductItemQuantity,
         setPreference,
-        preference
+        preference,
+        showHeader,
+        setShowHeader
     }}>{children}</AppContext.Provider>
 }
 

@@ -11,7 +11,7 @@ export default function Product({ productDetailsData, gridLayout }) {
     return (
         <div className='productSection'>
             <div className="productContent">
-                <div className="prodcutContainer" onClick={() => {
+                <div className="productContainer" onClick={() => {
                     navigate(`/singleproduct/${productDetailsData.id}`)
                     window.scrollTo({ top: 0, behavior: 'smooth' })
                 }}>

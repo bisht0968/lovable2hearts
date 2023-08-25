@@ -1,0 +1,31 @@
+@import "../../../css-config/mixins.scss";
+
+.adminSingleProductSection {
+    .adminSingleProductContent {
+        .adminSingleProductContainer {
+            border: 1px solid black;
+            display: flex;
+            width: 1000px;
+            margin: 80px auto;
+            padding: 20px;
+            box-shadow: 2px 2px 4px 0 black;
+
+            .adminSingleProdcutHeadings {
+                width: 25%;
+                font-weight: 500;
+
+                .heading {
+                    padding-block: 14px;
+                }
+            }
+
+            .adminSingleProductDetails {
+                width: 75%;
+
+                .section {
+                    padding-block: 14px;
+                }
+            }
+        }
+    }
+}

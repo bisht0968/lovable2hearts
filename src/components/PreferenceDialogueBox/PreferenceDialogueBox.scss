@@ -1,3 +1,5 @@
+@import "../../css-config/mixins.scss";
+
 .preferenceSection {
     position: absolute;
     top: 0;
@@ -19,6 +21,16 @@
             border-radius: 5px;
             box-shadow: 2px 2px 4px 0px black;
 
+            @include xsm {
+                margin: 100px 10px;
+                padding: 20px 10px;
+            }
+
+            @include sm {
+                margin: 100px 10px;
+                padding: 20px 10px;
+            }
+
             .preferenceText {
                 display: flex;
                 flex-direction: column;
@@ -29,6 +41,15 @@
                 .welcomeMessage {
                     font-size: 60px;
                     font-weight: 500;
+                    text-align: center;
+
+                    @include xsm {
+                        font-size: 20px;
+                    }
+
+                    @include sm {
+                        font-size: 50px;
+                    }
 
                     span {
                         color: #f1641e;
@@ -37,6 +58,10 @@
 
                 .prefenceSelectText {
                     font-size: 30px;
+
+                    @include xsm {
+                        font-size: 16px;
+                    }
                 }
             }
 
@@ -54,6 +79,13 @@
                     border-radius: 10px;
                     display: flex;
                     gap: 5px;
+
+                    @include xsm {
+                        font-size: 16px;
+                        padding: 5px 10px;
+                        justify-content: center;
+                        align-items: center;
+                    }
                 }
 
                 .preferenceButton:hover {

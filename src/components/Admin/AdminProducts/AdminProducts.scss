@@ -1,0 +1,49 @@
+@import "../../../css-config/mixins.scss";
+
+.adminProductsSection {
+    .adminProductsContent {
+        .adminProductsHeading {
+            margin-block: 40px;
+            font-weight: 500;
+
+            .heading {
+                border-bottom: 1px solid black;
+                font-size: 18px;
+                padding-block-end: 5px;
+            }
+
+            .adminProductsSubHeading {
+                margin-block: 30px;
+                font-size: 16px;
+                display: flex;
+
+                .subHeading {
+                    width: 25%;
+                    text-align: center;
+                    padding-block: 10px;
+                    border-bottom: 1px solid black;
+                }
+            }
+        }
+
+        .adminProductsListContainer {
+            .adminProductsList {
+                display: flex;
+                font-size: 16px;
+                border: 1px solid white;
+                padding: 10px;
+
+                .section {
+                    width: 25%;
+                    text-align: center;
+                }
+            }
+
+            .adminProductsList:hover {
+                cursor: pointer;
+                box-shadow: 2px 2px 4px 0 black;
+                transition: all 0.3s;
+            }
+        }
+    }
+}

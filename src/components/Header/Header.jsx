@@ -9,14 +9,12 @@ import { BsCartFill } from "react-icons/bs"
 import { useNavigate } from 'react-router-dom'
 import { GiHamburgerMenu } from "react-icons/gi"
 import { RxCross2 } from "react-icons/rx"
-import { IoMdTransgender } from "react-icons/io"
-import { GiLovers } from "react-icons/gi"
 
 export default function Header() {
 
     const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
 
-    const { cartIconQuantity } = useContext(AppContext)
+    const { cartIconQuantity, heading } = useContext(AppContext)
 
     const navigate = useNavigate();
 
@@ -42,16 +40,16 @@ export default function Header() {
                 <div className="headerContent">
                     <div className='headerLeft'>
                         <div className="headerLogo" onClick={() => {
-                            navigate('/')
+                            navigate('/home')
                             window.scrollTo({ top: 0, behavior: 'smooth' })
                         }}>
-                            Babsu
+                            {heading}
                         </div>
                     </div>
                     <div className="headerRight">
                         <ul className='headerItems'>
                             <li onClick={() => {
-                                navigate('/')
+                                navigate('/home')
                                 window.scrollTo({ top: 0, behavior: 'smooth' })
                             }}>HOME</li>
                             <li onClick={() => {
@@ -103,7 +101,7 @@ export default function Header() {
                                 </div>
                                 <ul className="menuItems">
                                     <li onClick={() => {
-                                        navigate('/')
+                                        navigate('/home')
                                         window.scrollTo({ top: 0, behavior: 'smooth' })
                                         setShowMenu(false)
                                     }}>HOME</li>
