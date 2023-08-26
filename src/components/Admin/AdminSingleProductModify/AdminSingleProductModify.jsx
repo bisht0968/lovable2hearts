@@ -1,8 +1,20 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import "./AdminAddProducts.scss"
+import React, { useContext, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
+import "./AdminSingleProductModify.scss"
+import { AppContext } from '../../../utils/Context';
 
-export default function AdminAddProducts() {
+export default function AdminSingleProductModify() {
+
+    const { setShowHeader } = useContext(AppContext)
+
+    useEffect(() => {
+        setShowHeader(false)
+    }, [])
+
+    const productId = useParams({});
+
+    const API = `http://127.0.0.1:8000/products_api/products/${productId.id}`
 
     const [formData, setFormData] = useState({
         name: '',
@@ -15,10 +27,13 @@ export default function AdminAddProducts() {
         reviews: ''
     });
     const [showMessage, setShowMessage] = useState(false)
+    const [modified, setModified] = useState(false)
+    const [singleProductDetails, setSingleProductDetails] = useState([]);
 
-    const handleChange = (e) => {
+
+    const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prevData) => ({
+        setFormData(prevData => ({
             ...prevData,
             [name]: value
         }));
@@ -26,114 +41,128 @@ export default function AdminAddProducts() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(formData);
         try {
-            const response = await axios.post('http://127.0.0.1:8000/products_api/products/', formData);
+            const response = await axios.put(`http://127.0.0.1:8000/products_api/products/${productId.id}/update/`, formData);
             console.log('Server response:', response.data);
         } catch (error) {
             console.error('Error sending data:', error);
         }
     };
 
+    const getSingleProduct = async (url) => {
+        const res = await axios.get(url)
+        setSingleProductDetails(res.data)
+    }
+
+    useEffect(() => {
+        getSingleProduct(API)
+    }, [API, modified])
+
     useEffect(() => {
         setShowMessage(false)
+        setModified(false)
     }, [])
 
     return (
-        <div className='adminAddProductsSection'>
-            <div className="adminAddProductsContent">
-                <div className="adminAddProductsContainer">
+        <div className='adminSingleProductModifySection'>
+            <div className="adminSingleProductModifyContent">
+                <div className="adminSingleProductModfiyContainer">
                     <form onSubmit={handleSubmit}>
                         <div className="section">
                             <div className="title">
-                                Name
+                                Name : ({singleProductDetails.name})
                             </div>
                             <input
                                 type="text"
                                 placeholder='NAME OF THE PRODUCT'
                                 name="name"
                                 value={formData.name}
-                                onChange={handleChange}
+                                onChange={handleInputChange}
                                 required
                             />
                         </div>
                         <div className="section">
                             <div className="title">
-                                Description
+                                Description : ({singleProductDetails.description})
                             </div>
                             <textarea
                                 name="description"
                                 value={formData.description}
-                                onChange={handleChange}
+                                onChange={handleInputChange}
                                 placeholder='DESCRIPTION OF THE PRODUCT'
                             />
                         </div>
                         <div className="section">
                             <div className="title">
-                                Price
+                                Price : ({singleProductDetails.price})
                             </div>
                             <input
                                 type='number'
                                 name="price"
                                 value={formData.price}
-                                onChange={handleChange}
+                                onChange={handleInputChange}
                                 placeholder='PRICE OF THE PRODUCT'
                                 required
                             />
                         </div>
                         <div className="section">
                             <div className="title">
-                                Shipping Price
+                                Shipping Price : ({singleProductDetails.shipping_price})
                             </div>
                             <input
                                 type='number'
                                 name="shipping_price"
                                 value={formData.shipping_price}
-                                onChange={handleChange}
+                                onChange={handleInputChange}
                                 placeholder='SHIPPING PRICE OF THE PRODUCT'
                             />
                         </div>
                         <div className="section">
                             <div className="title">
-                                Quantity
+                                Quantity : ({singleProductDetails.stock})
                             </div>
                             <input
                                 type='number'
                                 name="stock"
                                 value={formData.stock}
-                                onChange={handleChange}
+                                onChange={handleInputChange}
                                 placeholder='QUANTITY OF THE PRODUCT'
                             />
                         </div>
                         <div className="section">
                             <div className="title">
-                                Discount
+                                Discount : ({singleProductDetails.discount})
                             </div>
                             <input
                                 type='number'
                                 name="discount"
                                 value={formData.discount}
-                                onChange={handleChange}
+                                onChange={handleInputChange}
                                 placeholder='DISCOUNT ON THE PRODUCT'
                             />
                         </div>
                         <div className="section">
                             <div className="title">
-                                Reviews
+                                Reviews : ({singleProductDetails.reviews})
                             </div>
                             <input
                                 type='text'
                                 name="reviews"
                                 value={formData.reviews}
-                                onChange={handleChange}
+                                onChange={handleInputChange}
                                 placeholder='REVIEWS OF THE PRODUCT'
                             />
                         </div>
-                        <div className="submitButton" onClick={() => setShowMessage(true)}>
+                        <div className="submitButton" onClick={() => {
+                            setShowMessage(true)
+                            setModified(true)
+                        }}>
                             <button type="submit">Add Product</button>
                         </div>
-                        {showMessage && <div className="productAddedMessage">
+                        {showMessage && <div className="productModifiedMessage">
                             <div className="message">
-                                YOUR PRODUCT {formData.name} IS BEING SUCCESSFULLY ADDED!!
+                                YOUR PRODUCT {formData.name} IS BEING SUCCESSFULLY MODIFIED!!
                             </div>
                         </div>}
                     </form>

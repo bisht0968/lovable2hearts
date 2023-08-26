@@ -7,9 +7,9 @@ export default function AdminSingleProduct() {
 
     const productId = useParams({});
 
-    const API = `https://api.pujakaitem.com/api/products/${productId.id}`
+    const API = `http://127.0.0.1:8000/products_api/products/${productId.id}`
 
-    const [singleProductDetails, setSingleProductDetails] = useState({});
+    const [singleProductDetails, setSingleProductDetails] = useState([]);
 
 
     const getSingleProduct = async (url) => {

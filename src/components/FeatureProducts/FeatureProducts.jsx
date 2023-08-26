@@ -4,6 +4,7 @@ import axios from "axios"
 import "./FeatureProducts.scss"
 
 import Product from "../Products/Product/Product"
+import Pic from "../../assets/couple symbol.jpg"
 
 import { FaSpinner } from "react-icons/fa"
 import { AppContext } from '../../utils/Context'
@@ -36,6 +37,9 @@ export default function FeatureProducts() {
     return (
         <div className='featureProdcutsSection'>
             <div className="featureProductsContent">
+                <div className="backgroundImage">
+                    <img src={Pic} alt="" />
+                </div>
                 <div className="featureProductsContainer">
                     <div className="featureProductstext">
                         <div className="smallText">

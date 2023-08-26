@@ -1,4 +1,5 @@
 @import "../../css-config/mixins.scss";
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap');
 
 .headerSection {
     margin: 0px auto;
@@ -25,6 +26,7 @@
                 font-weight: 700;
                 color: #f1641e;
                 font-size: 27px;
+                font-family: 'Alex Brush', cursive;
             }
 
             .headerLogo:hover {

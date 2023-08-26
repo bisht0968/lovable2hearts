@@ -1,0 +1,42 @@
+.adminModifyProductsSection {
+    .adminModifyProductsContent {
+        .adminModifyproductsContainer {
+            margin-block: 40px;
+
+            .adminModifyHeadings {
+                font-weight: 500;
+                margin-block: 30px;
+                font-size: 16px;
+                display: flex;
+
+                .heading {
+                    width: 25%;
+                    text-align: center;
+                    padding-block: 10px;
+                    border-bottom: 1px solid black;
+                }
+            }
+
+            .adminModifyList {
+                display: flex;
+                font-size: 16px;
+                padding: 10px;
+            }
+
+            .section {
+                width: 25%;
+                text-align: center;
+
+                svg {
+                    color: red;
+                }
+
+                svg:hover {
+                    transform: scaleY(1.2);
+                    cursor: pointer;
+                    transition: all 0.3s;
+                }
+            }
+        }
+    }
+}
