@@ -24,7 +24,7 @@ export default function Admin() {
         <div className='adminSection'>
             <div className="adminContent">
                 <div className="adminWelcomeMessage">
-                    Welcome To <span>{heading}</span>Store
+                    Welcome To <span>{heading} </span>Store
                 </div>
                 <div className="adminPanelButtons">
                     <div className={`adminPanelButton  ${activeStatus === "products" ? "showActiveStatus" : ""}`} onClick={() => {
