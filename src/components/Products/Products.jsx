@@ -99,7 +99,11 @@ export default function Products() {
             const filteredData = productData.filter((element) => {
                 return element.name.toLowerCase().includes(text)
             })
-            setFilteredProductData(filteredData)
+            if (filteredData.length === 0) {
+                setFilteredProductData([])
+            } else {
+                setFilteredProductData(filteredData)
+            }
         }
     }, [text])
 

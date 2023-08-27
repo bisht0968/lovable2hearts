@@ -17,6 +17,16 @@
 
         @include xsm {
             flex-direction: column;
+            width: 90%;
+        }
+
+        @include sm {
+            flex-direction: column;
+            width: 90%;
+        }
+
+        @include md {
+            width: 90%;
         }
 
         .productsLeft {
@@ -221,29 +231,6 @@
                 }
             }
 
-            .companyFilter {
-                .title {
-                    font-weight: 600;
-                    font-size: 30px;
-                }
-
-                .companyDropdown {
-                    margin-block: 20px;
-                    padding-inline-start: 10px;
-
-                    select {
-                        padding: 5px;
-                        font-weight: 500;
-                        outline: 0;
-                        border-radius: 4px;
-                    }
-
-                    select:hover {
-                        cursor: pointer;
-                    }
-                }
-            }
-
             .clearFilters {
 
                 .clearFilterButton {
@@ -272,6 +259,10 @@
             width: 70%;
 
             @include xsm {
+                width: 100%;
+            }
+
+            @include sm {
                 width: 100%;
             }
 
@@ -353,29 +344,73 @@
 
                 @include xsm {
                     gap: 10px;
+                    justify-content: space-evenly;
+                }
+
+                @include sm {
+                    gap: 10px;
+                    justify-content: space-evenly;
                 }
 
                 .productsItemGridLayout {
                     width: 30%;
 
-                    .prodcutContainer {
+                    .productContainer {
                         @include xsm {
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: center;
+                            padding: 5px 2px;
+                        }
 
-                            .productImage {
+                        @include sm {
+                            padding: 5px 2px;
+                        }
+
+                        .productImage {
+                            @include xsm {
+                                width: 100px;
+                                height: 100px;
+                            }
+
+                            @include sm {
+                                width: 180px;
+                                height: 180px;
+                            }
+                        }
+
+                        .productDetails {
+                            @include xsm {
+                                display: flex;
+                                flex-direction: column;
+                                padding-inline: 20px;
+                            }
+
+                            @include sm {
+                                justify-content: space-evenly;
+                            }
+
+                            .productName {
                                 @include xsm {
-                                    margin: 0 auto;
+                                    font-size: 10px;
+                                }
+                            }
+
+                            .productPrice {
+                                @include xsm {
+                                    font-size: 10px;
                                 }
                             }
                         }
                     }
 
                     @include xsm {
-                        width: 100%;
+                        padding: 0;
+                        width: 47%;
                         border: 1px solid rgba(0, 0, 0, 0.3);
                         border-radius: 10px;
+                    }
+
+                    @include sm {
+                        padding: 0;
+                        width: 30%;
                     }
                 }
 
