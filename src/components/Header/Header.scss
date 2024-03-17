@@ -4,7 +4,7 @@
 .headerSection {
     margin: 0px auto;
     padding: 5px 40px;
-    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px -2px black;
     position: relative;
     z-index: 100;
 
@@ -37,14 +37,28 @@
         .headerRight {
             display: flex;
             gap: 20px;
-            font-weight: bold;
+            font-weight: 500;
+            font-size: 16px;
+            color: #626262;
             align-items: center;
 
             .headerItems {
                 list-style: none;
                 display: flex;
                 gap: 20px;
-                color: rgba(0, 0, 0, 0.6);
+                height: 35px;
+
+                li {
+                    margin: auto;
+                }
+
+                li hr {
+                    border: none;
+                    width: 100%;
+                    height: 3px;
+                    border-radius: 10px;
+                    background: #f1641e;
+                }
 
                 @include xsm {
                     display: none;
@@ -73,10 +87,10 @@
                     position: absolute;
                     top: 0;
                     right: 0;
-                    width: 100%;
-                    height: 100vh;
-                    border: 1px solid black;
+                    width: 50%;
+                    height: auto;
                     background-color: beige;
+                    border-bottom-left-radius: 30px;
 
                     .crossMenu {
                         position: absolute;
@@ -107,11 +121,28 @@
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
+                                flex-direction: column;
+                                gap: 5px;
 
                                 button {
                                     background-color: #f1641e;
+                                    padding: 5px 10px;
+                                    border-radius: 5px;
                                     color: white;
                                     border: none;
+                                }
+
+                                .userName {
+                                    color: black;
+                                    background-color: white;
+                                    padding: 5px 10px;
+                                    border-radius: 5px;
+                                    font-size: 10px;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    flex-direction: column;
+                                    gap: 2px;
                                 }
                             }
                         }
@@ -137,12 +168,10 @@
                         }
 
                         .mobileHeaderLogin {
-                            border: none;
                             margin: 0 auto;
                             padding: 5px 10px;
                             border-radius: 5px;
                             color: white;
-                            background-color: #f1641e;
                         }
                     }
 
@@ -159,7 +188,6 @@
             .headerItems li:hover {
                 color: black;
                 cursor: pointer;
-                transform: scale(1.07);
                 transition: all 0.3s;
             }
 
@@ -211,6 +239,7 @@
             .headerIcons {
                 display: flex;
                 gap: 20px;
+                height: 35px;
 
                 @include xsm {
                     display: none;
@@ -239,23 +268,43 @@
                 }
 
                 .headerUser {
+
+                    gap: 10px;
+
                     button {
-                        padding: 10px;
+                        padding: 6px 0px;
                         background-color: #f1641e;
                         color: white;
                         border: 0;
-                        border-radius: 10px;
                         width: 80px;
                     }
 
                     button:hover {
                         cursor: pointer;
-                        border: 1px solid white;
-                        background-color: #e5e5e5;
+                        border: 1px solid #f1641e;
+                        background-color: white;
                         color: #f1641e;
                         transition: all 0.3s;
                     }
+
+                    .userIcon {
+                        color: black;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-direction: column;
+                        font-size: 12px;
+
+                        svg:hover {
+                            cursor: default;
+                        }
+                    }
+
+                    .userIcon:hover {
+                        cursor: default;
+                    }
                 }
+
 
                 svg:hover {
                     cursor: pointer;
@@ -265,14 +314,17 @@
                     position: relative;
 
                     .cartItemsCount {
-                        color: rgb(46, 46, 237);
-                        background-color: white;
+                        color: white;
+                        background-color: #f1641e;
                         padding: 2px 3px;
                         border-radius: 50%;
                         font-size: 10px;
                         position: absolute;
-                        top: -5px;
-                        right: -6px;
+                        top: -2px;
+                        right: -4px;
+                        width: 31%;
+                        height: 42%;
+                        text-align: center;
                     }
                 }
             }
@@ -284,7 +336,7 @@
         top: 0;
         animation: sticky-header 0.3s ease forwards;
         transform: translateY(-80px);
-        background-color: rgba(229, 229, 229, 1);
+        background-color: white;
     }
 }
 

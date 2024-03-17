@@ -1,7 +1,7 @@
 @import "../../css-config/mixins.scss";
 
 .footerSection {
-    padding-block: 60px;
+    padding-block: 34px 0px;
     background-color: rgb(0, 0, 44);
     color: white;
 
@@ -14,12 +14,14 @@
     }
 
     .footerContent {
+        font-size: 12px;
+
         .footerUpperSection {
             display: flex;
             justify-content: space-evenly;
             width: 80%;
             margin: 0 auto;
-            padding-bottom: 40px;
+            padding-bottom: 20px;
             border-bottom: 1px solid white;
 
             @include xsm {
@@ -36,7 +38,7 @@
             .section {
                 display: flex;
                 flex-direction: column;
-                gap: 20px;
+                gap: 8px;
                 width: 40%;
 
                 @include xsm {
@@ -106,7 +108,7 @@
                     margin-block: 10px;
 
                     svg {
-                        font-size: 28px;
+                        font-size: 20px;
                         border: 1px solid white;
                         border-radius: 50%;
                         padding: 10px;
@@ -170,7 +172,7 @@
         }
 
         .footerLowerSection {
-            padding-block-start: 40px;
+            padding-block-start: 20px;
             display: flex;
             justify-content: space-evenly;
             flex-wrap: wrap;

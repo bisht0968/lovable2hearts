@@ -1,26 +1,40 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import './App.css';
 
 import Home from './components/Home/Home';
-import About from './components/About/About';
 import Products from './components/Products/Products';
-import Contact from './components/Contact/Contact';
-import SingleProduct from './components/SingleProduct/SingleProduct';
+import SingleProduct from './components/Products/SingleProduct/SingleProduct';
 import Cart from './components/Cart/Cart';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import Header from "./components/Header/Header"
 import Footer from './components/Footer/Footer';
-import PreferenceDialogueBox from "./components/PreferenceDialogueBox/PreferenceDialogueBox";
-import Admin from "./components/Admin/Admin";
-import AdminSingleProduct from "./components/Admin/AdminSingleProduct/AdminSingleProduct";
 import { AppContext } from "./utils/Context";
-import AdminSingleProductModify from "./components/Admin/AdminSingleProductModify/AdminSingleProductModify";
+import SignUp from "./components/Login_SignUp/SignUp/SignUp.jsx";
+import Login from "./components/Login_SignUp/Login/Login.jsx";
+
 
 function App() {
 
   const { showHeader, heading } = useContext(AppContext)
+
+  const [mobileLayout, setMobileLayout] = useState(true)
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setMobileLayout(true);
+      } else {
+        setMobileLayout(false);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     document.title = `${heading} - The only Store where you can buy for both`;
@@ -30,16 +44,12 @@ function App() {
     <BrowserRouter>
       {showHeader && <Header />}
       <Routes>
-        <Route path="/" element={<PreferenceDialogueBox />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products mobileLayout={mobileLayout} />} />
         <Route path="/singleproduct/:id" element={<SingleProduct />} />
-        <Route path="/admin-single-product/:id" element={<AdminSingleProduct />} />
-        <Route path="/admin-single-product-modify/:id/" element={<AdminSingleProductModify />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/cart" element={<Cart mobileLayout={mobileLayout} />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />

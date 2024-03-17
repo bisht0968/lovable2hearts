@@ -2,98 +2,100 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../utils/Context';
 import { useNavigate } from 'react-router-dom';
 
+import pic from "../../assets/cart-removebg-preview.png"
+
 import "./Cart.scss"
 
 import { FaTrash } from "react-icons/fa"
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"
-import { useAuth0 } from '@auth0/auth0-react';
 
-export default function Cart() {
-
-    const { user, isAuthenticated } = useAuth0();
+export default function Cart({ mobileLayout }) {
 
     const navigate = useNavigate();
 
-    const { cartProductData, handleCartProductQuantity, handleRemoveFromCart, handleClearCart, cartIconQuantity, setCartIconQuantity } = useContext(AppContext);
+    const { cartProductData, handleCartProductQuantity, handleRemoveFromCart, handleClearCart, cartIconQuantity, setCartIconQuantity, userName, fetchUserDetials } = useContext(AppContext);
 
-    const [cartSubtotal, setCartSubtotal] = useState(0);
     const [cartTotal, setCartTotal] = useState(0);
-    const [mobileLayout, setMobileLayout] = useState(false)
+
+    const [shippingPrice, setShippingPrice] = useState("FREE")
+    const [subtotal, setSubtotal] = useState(0)
 
     useEffect(() => {
-        let subtotal = 0;
+
+        let tempSubtotal = 0
+        let tempShippingPrice = "FREE"
+
         cartProductData.forEach(data => {
-            subtotal += data.price * data.quantity;
+            tempSubtotal += data.price * data.cartQuantity;
         });
-        setCartSubtotal(subtotal);
-        const shippingPrice = 50;
-        setCartTotal(subtotal + shippingPrice)
+        if (tempSubtotal > 99) {
+            tempShippingPrice = 50;
+            setShippingPrice(tempShippingPrice);
+            setCartTotal(tempSubtotal + tempShippingPrice);
+        } else {
+            setShippingPrice(tempShippingPrice);
+            setCartTotal(tempSubtotal);
+        }
+        setSubtotal(tempSubtotal);
     }, [cartProductData]);
 
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth < 768) {
-                setMobileLayout(true);
-            } else {
-                setMobileLayout(false);
-            }
-        };
-        handleResize();
-        window.addEventListener("resize", handleResize);
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
 
     useEffect(() => {
         const quantity = cartProductData.length
         setCartIconQuantity(quantity)
     }, [cartProductData, setCartIconQuantity, cartIconQuantity])
 
+    useEffect(() => {
+        fetchUserDetials()
+    }, [])
+
     return (
         <div className='cartSection'>
             <div className="cartContent">
-                {isAuthenticated ?
+                {localStorage.getItem('auth-token') ?
                     <div className='cartUserInformation'>
                         <div className="cartUserName">
                             <div className="cartUserNameHeading">
                                 Welcome
                             </div>
-                            {user.name}
+                            {userName}
                         </div>
                     </div>
                     :
                     ""}
-                <div className="cartHeadings">
-                    <div className="item">
-                        ITEM
-                    </div>
-                    <div className="price">
-                        PRICE
-                    </div>
-                    <div className="quantity">
-                        QUANTITY
-                    </div>
-                    {!mobileLayout &&
-                        <>
-                            <div className="subtotal">
-                                SUBTOTAL
-                            </div>
-                            <div className="remove">
-                                REMOVE
-                            </div>
-                        </>
-                    }
-                </div>
+
                 {cartProductData.length > 0 ?
                     <>
+                        <div className="cartHeadings">
+                            <div className="item">
+                                Products
+                            </div>
+                            <div className="price">
+                                Price
+                            </div>
+                            <div className="quantity">
+                                Quantity
+                            </div>
+                            {!mobileLayout &&
+                                <>
+                                    <div className="subtotal">
+                                        Subtotal
+                                    </div>
+                                    <div className="remove">
+                                        Remove
+                                    </div>
+                                </>
+                            }
+                        </div>
                         <div className="cartContainer">
                             {cartProductData.map((data, i) => {
                                 return <>
                                     <div className="cartProductsContainer" key={i}>
-                                        <div className="cartItem">
-
-                                            <div className="cartProductImage" >
+                                        <div className="cartItem" onClick={() => {
+                                            navigate(`/singleproduct/${data.id}`)
+                                            window.scrollTo({ top: 0, behavior: 'smooth' })
+                                        }}>
+                                            <div className="cartProductImage"  >
                                                 <img src={data.image?.[0].url} alt="" />
                                             </div>
                                             <div className="cartProductName" >
@@ -104,21 +106,21 @@ export default function Cart() {
                                             {Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(data.price)}
                                         </div>
                                         <div className="cartQuantity">
-                                            <div className="cartDecrementButton" onClick={() => handleCartProductQuantity("decrement", data)}>
+                                            {!mobileLayout ? <div className="cartDecrementButton" onClick={() => handleCartProductQuantity("decrement", data)}>
                                                 <AiOutlineMinus />
-                                            </div>
+                                            </div> : <></>}
                                             <div className="cartValue">
-                                                {data.quantity}
+                                                {data.cartQuantity}
                                             </div>
-                                            <div className="cartIncrementButton" onClick={() => handleCartProductQuantity("increment", data)}>
+                                            {!mobileLayout ? <div className="cartIncrementButton" onClick={() => handleCartProductQuantity("increment", data)}>
                                                 <AiOutlinePlus />
-                                            </div>
+                                            </div> : <></>}
                                         </div>
                                         {!mobileLayout && <div className="cartSubtotal">
-                                            {Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(data.price * data.quantity)}
+                                            {Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(data.price * data.cartQuantity)}
                                         </div>}
-                                        <div className="cartRemove" onClick={() => handleRemoveFromCart(data)}>
-                                            <FaTrash />
+                                        <div className="cartRemove" >
+                                            <FaTrash onClick={() => handleRemoveFromCart(data)} />
                                         </div>
                                     </div>
                                 </>
@@ -130,10 +132,10 @@ export default function Cart() {
                                 navigate('/products')
                                 window.scrollTo({ top: 0, behavior: 'smooth' })
                             }}>
-                                CONTINUE SHOPPING
+                                Continue Shopping
                             </div>
                             <div className="clearCartButton" onClick={handleClearCart}>
-                                CLEAR CART
+                                Clear Cart
                             </div>
                         </div>
                         <div className="cartBill">
@@ -153,10 +155,10 @@ export default function Cart() {
                             <div className="cartBillPrices">
                                 <div className="billPricesContainer">
                                     <div className="billPrices">
-                                        :   {Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(cartSubtotal)}
+                                        :   {Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(subtotal)}
                                     </div>
                                     <div className="billPrices">
-                                        : 123
+                                        : {subtotal > 99 ? Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(Number(shippingPrice)) : shippingPrice}
                                     </div>
                                 </div>
                                 <div className="billPrices totalAmount">
@@ -164,11 +166,26 @@ export default function Cart() {
                                 </div>
                             </div>
                         </div>
+                        <div className="promoCode">
+                            <p>If you have a promo code,Enter it here</p>
+                            <form action="">
+                                <input type="text" placeholder='promo code' />
+                                <button>Submit</button>
+                            </form>
+                        </div>
+                        <div className="checkout">
+                            <button>
+                                Proceed To Checkout
+                            </button>
+                        </div>
                     </>
                     :
                     <div className='cartNoItemContainer'>
                         <div className="cartNoItemHeading">
                             No Item Is Present in Your Cart!!
+                        </div>
+                        <div className="cartNoItemBackground">
+                            <img src={pic} alt="" />
                         </div>
                         <div className="cartNoItemButton" onClick={() => {
                             navigate('/products')

@@ -1,0 +1,57 @@
+@import '../../../css-config/mixins.scss';
+
+.newsLetterSection {
+    background: linear-gradient(0deg, #ffc7ab, #e1ffea22 60%);
+
+    .newsLetterContent {
+        width: 80%;
+        height: 250px;
+        margin: auto;
+        padding-block: 20px;
+
+        .newsLetterContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            @include xsm {
+                text-align: center;
+            }
+
+            form {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                input {
+                    width: 50%;
+                    padding: 10px 20px;
+                    border: 1px solid rgb(209, 206, 206);
+                    border-top-left-radius: 20px;
+                    border-right: none;
+                    border-bottom-left-radius: 20px;
+                }
+
+                button {
+                    padding: 10px 20px;
+                    border: 1px solid #f1641e;
+                    background-color: #f1641e;
+                    color: white;
+                    border-top-right-radius: 20px;
+                    border-bottom-right-radius: 20px;
+                    border-left: none;
+                }
+
+                button:hover {
+                    color: #f1641e;
+                    background-color: white;
+                    border: 1px solid #f1641e;
+                    cursor: pointer;
+                    transition: 0.3s all;
+                }
+            }
+        }
+    }
+}

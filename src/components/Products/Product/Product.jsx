@@ -11,12 +11,12 @@ export default function Product({ productDetailsData, gridLayout }) {
     return (
         <div className='productSection'>
             <div className="productContent">
-                <div className="productContainer" onClick={() => {
+                <div className={`${gridLayout ? 'productContainer' : 'listLayoutProductContainer'}`} onClick={() => {
                     navigate(`/singleproduct/${productDetailsData.id}`)
                     window.scrollTo({ top: 0, behavior: 'smooth' })
                 }}>
                     <div className="productImage">
-                        <img src={productDetailsData.image} alt="" />
+                        <img src={productDetailsData.image && productDetailsData.image.length > 0 ? productDetailsData.image[0].url : ""} alt="" />
                     </div>
                     <div className="productDetails">
                         <div className="productName">

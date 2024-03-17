@@ -1,0 +1,99 @@
+@import "../../../css-config/mixins.scss";
+
+.signUpSection {
+    background: linear-gradient(180deg, #ffc7ab, #e1ffea22 80%);
+
+    .signUpContent {
+        width: 40%;
+        margin: auto;
+        padding: 40px;
+
+        @include xsm {
+            padding: 20px;
+            width: 80%;
+        }
+
+        .signUpContainer {
+            background-color: white;
+            padding: 40px;
+
+            @include xsm {
+                padding: 20px;
+            }
+
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .signUpFields {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 10px;
+                margin-block: 20px;
+
+                input {
+                    padding: 10px;
+                    border: 1px solid rgb(218 218 218)
+                }
+            }
+
+            .signUpButton {
+                border: none;
+                width: 100%;
+
+                button {
+                    width: 100%;
+                    border: 1px solid white;
+                    padding: 10px;
+                    background-color: #f1641e;
+                    color: white;
+                }
+
+                button:hover {
+                    cursor: pointer;
+                    background-color: white;
+                    color: #f1641e;
+                    border: 1px solid #f1641e;
+                    transition: 0.3s all;
+                }
+            }
+
+            .loginButton {
+                font-size: 10px;
+                margin-block: 10px;
+
+                span {
+                    color: rgb(227, 2, 2);
+                }
+
+                span:hover {
+                    cursor: pointer;
+                    text-decoration: underline;
+
+                }
+            }
+
+            .savedSuccessfullyMessage {
+                text-align: center;
+                border: 1px solid white;
+                padding: 5px;
+                background: linear-gradient(180deg, #f5d75f, #f8a065);
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                color: white;
+                margin-block: 5px;
+            }
+
+            .signUpAgree {
+                display: flex;
+                justify-content: center;
+
+                p {
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+}

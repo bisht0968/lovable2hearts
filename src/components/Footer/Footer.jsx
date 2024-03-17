@@ -1,14 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import "./Footer.scss"
 
-import { AiOutlineInstagram, AiOutlineYoutube, AiOutlineGithub, AiOutlinePhone } from "react-icons/ai"
+import { AiOutlineInstagram, AiOutlineYoutube, AiOutlinePhone } from "react-icons/ai"
+import { FaWhatsapp } from "react-icons/fa";
 import { BiLogoGmail } from "react-icons/bi"
 import { useNavigate } from "react-router-dom"
 
+import { AppContext } from '../../utils/Context'
+
 export default function Footer() {
 
+    const { setMenuHorizontalLine } = useContext(AppContext)
+
     const navigate = useNavigate();
+
+    const { footerAbout } = useContext(AppContext)
 
     return (
         <div className='footerSection'>
@@ -16,10 +23,10 @@ export default function Footer() {
                 <div className="footerUpperSection">
                     <div className="section">
                         <div className="footerHeading">
-                            Babsu Store
+                            Lovable2Hearts
                         </div>
                         <div className="footerUpperText">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, alias.
+                            {footerAbout}
                         </div>
                     </div>
                     <div className="section mobileSection">
@@ -27,19 +34,13 @@ export default function Footer() {
                             <li onClick={() => {
                                 navigate('/')
                                 window.scrollTo({ top: 0, behavior: 'smooth' })
+                                setMenuHorizontalLine("home")
                             }}>Home</li>
                             <li onClick={() => {
-                                navigate('/about')
-                                window.scrollTo({ top: 0, behavior: 'smooth' })
-                            }}>About</li>
-                            <li onClick={() => {
                                 navigate('/products')
+                                setMenuHorizontalLine("products")
                                 window.scrollTo({ top: 0, behavior: 'smooth' })
                             }}>Products</li>
-                            <li onClick={() => {
-                                navigate('/contact')
-                                window.scrollTo({ top: 0, behavior: 'smooth' })
-                            }}>Contact</li>
                         </ul>
                     </div>
                     <div className="section mobileSection">
@@ -49,7 +50,7 @@ export default function Footer() {
                         <div className="footerIcons">
                             <AiOutlineInstagram />
                             <AiOutlineYoutube />
-                            <AiOutlineGithub />
+                            <FaWhatsapp />
                         </div>
                     </div>
                     <div className="section footerContactSection">
@@ -67,14 +68,14 @@ export default function Footer() {
                                 <span className="footerIcon">
                                     <BiLogoGmail />
                                 </span>
-                                babsu@gmail.com
+                                lovable2hearts@gmail.com
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="footerLowerSection">
                     <div className="copyrightMessage">
-                        @2023 BabsuStore. All Rights Reserved
+                        @2023 Lovable2Hearts. All Rights Reserved
                     </div>
                     <ul className="footerLowerMenu">
                         <li className='footerLowerText'>PRIVACY POLICY</li>

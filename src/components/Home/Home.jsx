@@ -2,10 +2,12 @@ import React, { useContext } from 'react'
 
 import "./Home.scss"
 
-import Banner from "../Banner/Banner"
-import Services from '../Services/Services'
-import FeatureProducts from '../FeatureProducts/FeatureProducts'
+import Banner from "./Banner/Banner"
+import Services from './Services/Services'
+import FeatureProducts from './FeatureProducts/FeatureProducts'
+import Offers from './Offers/Offers'
 import { AppContext } from '../../utils/Context'
+import NewsLetter from './NewsLetter/NewsLetter'
 
 export default function Home() {
 
@@ -20,8 +22,14 @@ export default function Home() {
                 <div className="features">
                     <FeatureProducts />
                 </div>
+                <div className="offers">
+                    <Offers />
+                </div>
                 <div className="servicesAndTrustedSection">
                     <Services />
+                </div>
+                <div className="newsLetter">
+                    <NewsLetter />
                 </div>
             </div>
         </div>

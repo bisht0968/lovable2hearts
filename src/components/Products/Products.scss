@@ -37,26 +37,26 @@
 
             .searchBar {
                 display: flex;
+                border: 1px solid black;
 
                 input {
                     padding: 8px;
                     outline: 0;
-                    border: 1px solid black;
                     border-right: 0;
+                    border: none;
                     width: 100%;
                 }
 
-                .searcIcon {
+                .searchIcon {
                     padding: 8px;
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    border: 1px solid black;
                     border-left: 0;
                     background-color: rgba(0, 0, 0, 0.09);
                 }
 
-                .searcIcon:hover {
+                .searchIcon:hover {
                     cursor: pointer;
                 }
             }
@@ -116,7 +116,7 @@
             .clearFilters {
 
                 .clearFilterButton {
-                    font-size: 18px;
+                    font-size: 16px;
                     font-weight: 500;
                     color: white;
                     background-color: rgb(241, 100, 30);
@@ -151,17 +151,17 @@
             top: -20px;
             background-color: white;
             z-index: 100;
-            height: 550px;
-            padding: 40px;
+            height: auto;
+            padding: 20px;
             border-bottom-right-radius: 10px;
 
             .mobileFilterHeading {
-                margin-block-end: 20px;
+                margin-block-end: 10px;
                 display: flex;
                 justify-content: space-between;
 
                 .text {
-                    font-size: 30px;
+                    font-size: 16px;
                     font-weight: 600;
                 }
 
@@ -177,26 +177,26 @@
 
             .searchBar {
                 display: flex;
+                border: 1px solid black;
 
                 input {
                     padding: 8px;
                     outline: 0;
-                    border: 1px solid black;
+                    border: none;
                     border-right: 0;
                     width: 100%;
                 }
 
-                .searcIcon {
+                .searchIcon {
                     padding: 8px;
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    border: 1px solid black;
-                    border-left: 0;
+                    border: none;
                     background-color: rgba(0, 0, 0, 0.09);
                 }
 
-                .searcIcon:hover {
+                .searchIcon:hover {
                     cursor: pointer;
                 }
             }
@@ -204,15 +204,16 @@
             .categoryFilter {
                 .title {
                     font-weight: 600;
-                    font-size: 30px;
-                    margin-block: 20px;
+                    font-size: 20px;
+                    margin-block: 10px;
                 }
 
                 .categoryMenu {
                     list-style: none;
+                    font-size: 13px;
                     display: flex;
                     flex-direction: column;
-                    gap: 10px;
+                    gap: 5px;
                     padding-inline-start: 10px;
                     font-weight: 450;
                 }
@@ -232,7 +233,6 @@
             }
 
             .clearFilters {
-
                 .clearFilterButton {
                     font-size: 18px;
                     font-weight: 500;
@@ -240,7 +240,7 @@
                     background-color: rgb(241, 100, 30);
                     width: 50%;
                     padding: 10px;
-                    margin-block: 40px;
+                    margin-block: 20px;
                     text-align: center;
                     border: 1px solid white;
                 }
@@ -256,7 +256,7 @@
         }
 
         .productsRight {
-            width: 70%;
+            width: 72%;
 
             @include xsm {
                 width: 100%;
@@ -340,7 +340,8 @@
             .productsContainerGridLayout {
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: space-between;
+                justify-content: space-around;
+                margin-block: 20px;
 
                 @include xsm {
                     gap: 10px;
@@ -353,9 +354,10 @@
                 }
 
                 .productsItemGridLayout {
-                    width: 30%;
+                    width: 33%;
 
                     .productContainer {
+
                         @include xsm {
                             padding: 5px 2px;
                         }
@@ -364,7 +366,17 @@
                             padding: 5px 2px;
                         }
 
+                        @include md {
+                            padding: 5px 2px;
+                        }
+
                         .productImage {
+                            width: 100%;
+
+                            img {
+                                object-fit: cover;
+                            }
+
                             @include xsm {
                                 width: 100px;
                                 height: 100px;
@@ -377,6 +389,9 @@
                         }
 
                         .productDetails {
+                            display: flex;
+                            flex-direction: column;
+
                             @include xsm {
                                 display: flex;
                                 flex-direction: column;
@@ -388,6 +403,8 @@
                             }
 
                             .productName {
+                                font-size: 14px;
+
                                 @include xsm {
                                     font-size: 10px;
                                 }
@@ -416,6 +433,11 @@
 
                 .productsItemGridLayout:hover {
                     cursor: pointer;
+
+                    img {
+                        transform: scale(1.1);
+                        transition: all 0.3s;
+                    }
                 }
             }
 
@@ -471,6 +493,23 @@
                             cursor: pointer;
                         }
                     }
+                }
+            }
+
+            .pagination {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-block: 20px;
+
+                button {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                button:hover {
+                    cursor: pointer;
                 }
             }
         }

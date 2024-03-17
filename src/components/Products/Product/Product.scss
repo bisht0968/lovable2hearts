@@ -7,6 +7,63 @@
             border-radius: 10px;
             background-color: white;
 
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+
+            .productImage {
+                width: 200px;
+                height: 200px;
+                overflow: hidden;
+                border-radius: 10px;
+                margin: 0 auto;
+
+                img {
+                    border-radius: 10px;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+
+                img:hover {
+                    transform: scale(1.1);
+                    transition: all 0.3s;
+                }
+            }
+
+            .productDetails {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                flex-direction: column;
+                margin-block: 10px;
+                padding-left: 10px;
+
+                .productName {
+                    font-size: 16px;
+                }
+
+                .productPrice {
+                    font-weight: 500;
+                    font-size: 18px;
+                    color: rgba(241, 100, 30, 1);
+                }
+
+            }
+        }
+
+        .listLayoutProductContainer {
+            padding: 20px;
+            border-radius: 10px;
+            background-color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: row;
+            gap: 10px;
+
             .productImage {
                 width: 200px;
                 height: 200px;
@@ -29,7 +86,11 @@
             .productDetails {
                 display: flex;
                 justify-content: space-between;
+                align-items: flex-start;
+                flex-direction: column;
                 margin-block: 10px;
+                width: 60%;
+                gap: 10px;
 
                 .productName {
                     font-size: 16px;
@@ -41,8 +102,40 @@
                     color: rgba(241, 100, 30, 1);
                 }
 
+                .productDescription {
+                    font-size: 14px;
+                    color: rgba(0, 0, 0, 0.5);
+                    font-weight: 500;
+                    overflow: hidden;
+                }
+
+                .productLinkButton {
+                    border: 1px solid rgb(241, 100, 30);
+                    font-weight: 500;
+                    font-size: 18px;
+                    padding: 10px;
+                    color: rgb(241, 100, 30);
+                    width: 40%;
+                    text-align: center;
+                }
+
             }
+
         }
 
+        .listLayoutProductContainer:hover {
+            cursor: pointer;
+
+            img {
+                transform: scale(1.1);
+                transition: all 0.3s;
+            }
+
+            .productLinkButton {
+                background-color: #f1641e;
+                color: white;
+                transition: 0.3s all;
+            }
+        }
     }
 }

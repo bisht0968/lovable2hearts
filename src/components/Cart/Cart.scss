@@ -6,8 +6,8 @@
     padding: 60px 30px;
 
     @include xsm {
+        padding: 20px 10px;
         width: 80%;
-        padding-inline: 10px;
     }
 
     @include sm {
@@ -39,9 +39,9 @@
 
         .cartHeadings {
             display: flex;
-            padding-block-end: 40px;
+            padding-block-end: 20px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-            margin-bottom: 40px;
+            margin-bottom: 20px;
 
             @include xsm {
                 gap: 30px;
@@ -73,12 +73,13 @@
         }
 
         .cartContainer {
-            padding-bottom: 40px;
+            padding-bottom: 20px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 
             .cartProductsContainer {
                 display: flex;
                 padding-block-end: 10px;
+                font-size: 12px;
 
                 @include xsm {
                     font-size: 10px;
@@ -135,6 +136,7 @@
                     .cartProductImage {
                         width: 70px;
                         height: 50px;
+                        object-fit: contain;
 
                         @include xsm {
                             width: 50px;
@@ -148,12 +150,14 @@
                     }
 
                     .cartProductName {
-                        font-size: 14px;
-
                         @include xsm {
                             font-size: 10px;
                         }
                     }
+                }
+
+                .cartItem:hover {
+                    cursor: pointer;
                 }
 
                 .cartQuantity {
@@ -230,6 +234,20 @@
                 }
             }
 
+            .cartNoItemBackground {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 250px;
+                width: 250px;
+                margin: auto;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
             .cartNoItemButton {
                 border: 1px solid white;
                 padding: 20px;
@@ -238,7 +256,7 @@
                 width: 20%;
                 background-color: #f1641e;
                 color: white;
-                margin: 60px auto;
+                margin: 20px auto;
                 font-size: 20px;
 
                 @include xsm {
@@ -263,23 +281,23 @@
             justify-content: space-between;
             padding-block: 10px;
 
-            @include xsm {
-                justify-content: space-evenly;
-            }
-
             .continueShoppingButton,
             .clearCartButton {
                 border: 1px solid white;
-                padding: 20px;
+                padding: 10px;
                 font-weight: 500;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 text-align: center;
+                width: 20%;
+                background-color: #f1641e;
+                color: white;
 
                 @include xsm {
                     font-size: 10px;
                     padding: 10px;
+                    width: 40%;
                 }
             }
 
@@ -287,39 +305,14 @@
             .clearCartButton:hover {
                 cursor: pointer;
                 transition: all 0.3s;
-            }
-
-            .continueShoppingButton {
-                width: 20%;
-                background-color: #f1641e;
-                color: white;
-            }
-
-            .continueShoppingButton:hover {
                 color: #f1641e;
                 background-color: white;
                 border: 1px solid #f1641e;
             }
-
-            .clearCartButton {
-                width: 20%;
-                color: white;
-                background-color: red;
-
-                @include xsm {
-                    width: 20%;
-                }
-            }
-
-            .clearCartButton:hover {
-                color: red;
-                background-color: white;
-                border: 1px solid red;
-            }
         }
 
         .cartBill {
-            padding: 30px;
+            padding: 10px;
             display: flex;
             gap: 40px;
             border: 1px solid rgba(0, 0, 0, 0.04);
@@ -327,10 +320,11 @@
             width: 30%;
             justify-content: center;
             align-items: center;
+            font-size: 12px;
             border-radius: 10px;
 
             @include xsm {
-                width: 80%;
+                width: 90%;
             }
 
             @include sm {
@@ -363,6 +357,8 @@
             }
 
             .cartBillPrices {
+                font-weight: bold;
+
                 .billPricesContainer {
                     padding-block-end: 10px;
                     border-bottom: 1px solid rgba(0, 0, 0, 0.5);
@@ -381,6 +377,66 @@
                 .totalAmount {
                     color: black;
                 }
+            }
+        }
+
+        .promoCode {
+            width: 30%;
+
+            @include xsm {
+                width: 100%;
+            }
+
+            p {
+                color: rgb(86, 86, 86);
+                font-size: 12px;
+            }
+
+            form {
+                display: flex;
+                align-items: center;
+
+                input {
+                    padding: 10px;
+                    font-size: 12px;
+                    border: none;
+                    background-color: rgb(236, 235, 235);
+                }
+
+                button {
+                    padding: 10px 20px;
+                    font-size: 12px;
+                    border: none;
+                    background-color: black;
+                    color: white;
+                }
+
+                button:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .checkout {
+            button {
+                padding: 10px 20px;
+                font-size: 16px;
+                border: 1px solid white;
+                background-color: #f1641e;
+                width: 20%;
+                color: white;
+
+                @include xsm {
+                    width: 100%;
+                }
+            }
+
+            button:hover {
+                cursor: pointer;
+                background-color: white;
+                border: 1px solid #f1641e;
+                color: #f1641e;
+                transition: 0.3s all;
             }
         }
     }

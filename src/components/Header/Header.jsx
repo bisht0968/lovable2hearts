@@ -1,20 +1,18 @@
+
 import React, { useContext, useEffect, useState } from 'react'
-import { useAuth0 } from "@auth0/auth0-react";
 
 import "./Header.scss"
 import { AppContext } from '../../utils/Context'
 
-import { BiSearchAlt2 } from "react-icons/bi"
 import { BsCartFill } from "react-icons/bs"
 import { useNavigate } from 'react-router-dom'
 import { GiHamburgerMenu } from "react-icons/gi"
 import { RxCross2 } from "react-icons/rx"
+import { FaUser } from "react-icons/fa";
 
 export default function Header() {
 
-    const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
-
-    const { cartIconQuantity, heading } = useContext(AppContext)
+    const { cartIconQuantity, heading, menuHorizontalLine, setMenuHorizontalLine, userName, fetchUserDetials } = useContext(AppContext)
 
     const navigate = useNavigate();
 
@@ -34,13 +32,18 @@ export default function Header() {
         window.addEventListener('scroll', handleScroll)
     }, [])
 
+    useEffect(() => {
+        fetchUserDetials()
+    }, [])
+
     return (
         <>
             <div className={`headerSection ${scrolled ? "stickyHeader" : ""}`}>
                 <div className="headerContent">
                     <div className='headerLeft'>
                         <div className="headerLogo" onClick={() => {
-                            navigate('/home')
+                            navigate('/')
+                            setMenuHorizontalLine("home")
                             window.scrollTo({ top: 0, behavior: 'smooth' })
                         }}>
                             {heading}
@@ -49,40 +52,56 @@ export default function Header() {
                     <div className="headerRight">
                         <ul className='headerItems'>
                             <li onClick={() => {
-                                navigate('/home')
+                                navigate('/')
+                                setMenuHorizontalLine("home")
                                 window.scrollTo({ top: 0, behavior: 'smooth' })
-                            }}>HOME</li>
-                            <li onClick={() => {
-                                navigate('/about')
-                                window.scrollTo({ top: 0, behavior: 'smooth' })
-                            }}>ABOUT</li>
+                            }}>Home{menuHorizontalLine === "home" ? <hr /> : <></>}</li>
                             <li onClick={() => {
                                 navigate('/products')
+                                setMenuHorizontalLine("products")
                                 window.scrollTo({ top: 0, behavior: 'smooth' })
-                            }}>PRODUCTS</li>
-                            <li onClick={() => {
-                                navigate('/contact')
-                                window.scrollTo({ top: 0, behavior: 'smooth' })
-                            }}>CONTACT</li>
+                            }}>Products{menuHorizontalLine === "products" ? <hr /> : <></>}</li>
                         </ul>
                         <div className="headerIcons">
-                            {isAuthenticated && <span className="userName">{user.name}</span>}
-                            {isAuthenticated ?
-                                <div className="headerUser">
-                                    <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
-                                        Log Out
-                                    </button>
-                                </div>
+                            {localStorage.getItem('auth-token') ?
+                                <>
+                                    <div className="headerUser">
+                                        <div className="userIcon">
+                                            <div className="icons">
+                                                <FaUser />
+                                            </div>
+                                            <div className="username">
+                                                {userName}
+                                            </div>
+                                        </div>
+                                        <div className="logoutButton">
+                                            <button
+                                                onClick={() => {
+                                                    localStorage.removeItem('auth-token')
+                                                    setMenuHorizontalLine("home")
+                                                    navigate('/')
+                                                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                                                }}>
+                                                Logout
+                                            </button>
+                                        </div>
+                                    </div>
+                                </>
                                 :
                                 <div className="headerUser">
-                                    <button onClick={() => loginWithRedirect()}>Log In</button>
+                                    <button onClick={() => {
+                                        navigate('/login')
+                                        setMenuHorizontalLine("")
+                                        window.scrollTo({ top: 0, behavior: 'smooth' })
+                                    }}>
+                                        Log In
+                                    </button>
                                 </div>
                             }
-                            <div className="headerSearch">
-                                <BiSearchAlt2 />
-                            </div>
+
                             <div className="headerCart" onClick={() => {
                                 navigate("/cart")
+                                setMenuHorizontalLine("")
                                 window.scrollTo({ top: 0, behavior: 'smooth' })
                             }}>
                                 <BsCartFill />
@@ -101,40 +120,33 @@ export default function Header() {
                                 </div>
                                 <ul className="menuItems">
                                     <li onClick={() => {
-                                        navigate('/home')
+                                        navigate('/')
                                         window.scrollTo({ top: 0, behavior: 'smooth' })
                                         setShowMenu(false)
-                                    }}>HOME</li>
-                                    <li onClick={() => {
-                                        navigate('/about')
-                                        window.scrollTo({ top: 0, behavior: 'smooth' })
-                                        setShowMenu(false)
-                                    }}>ABOUT</li>
+                                    }}>Home</li>
                                     <li onClick={() => {
                                         navigate('/products')
                                         window.scrollTo({ top: 0, behavior: 'smooth' })
                                         setShowMenu(false)
-                                    }}>PRODUCTS</li>
-                                    <li onClick={() => {
-                                        navigate('/contact')
-                                        window.scrollTo({ top: 0, behavior: 'smooth' })
-                                        setShowMenu(false)
-                                    }}>CONTACT</li>
-                                    <li className='mobileHeaderLogin'>
-                                        {isAuthenticated ?
+                                    }}>Products</li>
+                                    <li className='mobileHeaderLogin' style={{ border: localStorage.getItem('auth-token') ? '1px dotted #aaaa1e' : 'none' }}>
+                                        {localStorage.getItem('auth-token') ?
                                             <span className='menuItemsIcon'>
-                                                <button onClick={() => loginWithRedirect()}>Log Out</button>
-                                            </span>
-                                            :
-                                            <span className='menuItemsIcon'>
-                                                <button onClick={() => loginWithRedirect()}>Log In</button>
-                                                {isAuthenticated && <span className="userName">{user.name}</span>}
+                                                {localStorage.getItem('auth-token') && <span className="userName">  <FaUser />{userName}</span>}
+                                                <button onClick={() => {
+                                                    navigate('/login')
+                                                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                                                    setShowMenu(false)
+                                                    localStorage.removeItem('auth-token')
+                                                }}>Log Out</button>
+                                            </span> : <span className='menuItemsIcon'>
+                                                <button onClick={() => {
+                                                    navigate('/login')
+                                                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                                                    setShowMenu(false)
+                                                }}>Log In</button>
                                             </span>
                                         }
-                                    </li>
-                                    <li>
-                                        <span>  <BiSearchAlt2 /></span>
-                                        <span className="menuItemsText">Search</span>
                                     </li>
                                     <li>
                                         <div className='menuCart' onClick={() => {

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react'
-import axios from 'axios';
 
 import "./Products.scss"
 
@@ -7,40 +6,27 @@ import Product from "./Product/Product"
 
 import { BsFillGridFill, BsList, BsSearch } from "react-icons/bs"
 import { RxCross2 } from "react-icons/rx"
+import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
+
+
 import { AppContext } from '../../utils/Context';
 
-export default function Products() {
+export default function Products({ mobileLayout }) {
 
-    const API = "https://api.pujakaitem.com/api/products"
-
-    const [productData, setProductData] = useState([]);
     const [filteredProductData, setFilteredProductData] = useState([]);
     const [gridLayout, setGridLayout] = useState(true);
     const [sortedValue, setSortedValue] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
     const [text, setText] = useState("");
     const [categoryMenuActivated, setCategoryMenuActivated] = useState("all");
-    const [mobileLayout, setMobileLayout] = useState(true)
     const [showMobileFilter, setShowMobileFilter] = useState(false)
-    const { preference } = useContext(AppContext)
+    const { productData, getProductData, API } = useContext(AppContext)
 
-    const getProductData = async (url) => {
-        try {
-            if (preference === "straight") {
-                const res = await axios.get(url)
-                const limitedData = res.data.slice(0, 12)
-                setProductData(limitedData)
-            } else {
-                setProductData([])
-            }
-        } catch (error) {
-            console.error('Error fetching products:', error);
-        }
-    }
+    const newAPI = `${API}/allproducts`
 
     useEffect(() => {
-        getProductData(API)
-    }, [preference])
+        getProductData(newAPI)
+    }, [])
 
     const handleSorting = () => {
         const userSortedValue = document.getElementById("sort");
@@ -61,74 +47,69 @@ export default function Products() {
             sortedData.sort((a, b) => b.name.localeCompare(a.name));
         }
 
-        setFilteredProductData(sortedData);
+        setCurrentProducts(sortedData);
     }, [sortedValue, productData]);
 
     const filterByCategory = (category) => {
-        if (category === "") {
-            setSelectedCategory("")
+        if (category === "all") {
+            setSelectedCategory("all")
         } else {
             setSelectedCategory(category)
         }
     }
 
+    const [currentProducts, setCurrentProducts] = useState([])
     useEffect(() => {
-        if (selectedCategory === "") {
-            setFilteredProductData([]);
-            getProductData(API)
+        if (selectedCategory === "all") {
+            const newCurrentProducts = productData.slice(indexOfFirstProduct, indexOfLastProduct);
+
+            setCurrentProducts(newCurrentProducts);
         } else {
             const filteredData = productData.filter(product => product.category === selectedCategory);
-            setFilteredProductData(filteredData)
+            setCurrentProducts(filteredData);
         }
     }, [selectedCategory]);
 
     const updateSearchValue = (event) => {
         const value = event.target.value;
-        if (value === "") {
-            setText("")
-        } else {
-            setText(value)
-        }
+        setText(value)
     }
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 9;
+
+
+    const nextPage = () => setCurrentPage(currentPage + 1);
+    const prevPage = () => setCurrentPage(currentPage - 1);
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+
+
     useEffect(() => {
-        if (text === "") {
-            setFilteredProductData([])
-            getProductData(API)
-        } else {
-            const filteredData = productData.filter((element) => {
-                return element.name.toLowerCase().includes(text)
-            })
-            if (filteredData.length === 0) {
-                setFilteredProductData([])
-            } else {
-                setFilteredProductData(filteredData)
-            }
-        }
-    }, [text])
+        const filteredData = productData.filter((element) => {
+            return element.name && element.name.toLowerCase().includes(text.toLowerCase());
+        });
+        setFilteredProductData(filteredData);
+
+        const newCurrentProducts = filteredData.length === 0 && text === ""
+            ? productData.slice(indexOfFirstProduct, indexOfLastProduct)
+            : filteredData.slice(indexOfFirstProduct, indexOfLastProduct);
+
+        setCurrentProducts(newCurrentProducts);
+    }, [text, productData, indexOfFirstProduct, indexOfLastProduct]);
+
 
     const handleClearFilters = () => {
         setText("")
-        setSelectedCategory("")
+        setSelectedCategory("all")
         setSortedValue("")
         setCategoryMenuActivated("all")
         setSortedValue("")
     }
 
     useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth <= 768) {
-                setMobileLayout(true);
-            } else {
-                setMobileLayout(false);
-            }
-        };
-        handleResize();
-        window.addEventListener("resize", handleResize);
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [currentPage]);
 
     return (
         <div className='productsSection'>
@@ -140,7 +121,7 @@ export default function Products() {
                                 <input type="text" placeholder='Search' onChange={updateSearchValue} value={text}
                                     name='searchText' />
                             </form>
-                            <div className="searcIcon">
+                            <div className="searchIcon">
                                 <BsSearch />
                             </div>
                         </div>
@@ -150,40 +131,29 @@ export default function Products() {
                             </div>
                             <ul className="categoryMenu">
                                 <li className={`${categoryMenuActivated === "all" ? "categoryMenuActive" : ""}`} onClick={() => {
-                                    filterByCategory("")
+                                    filterByCategory("all")
                                     setCategoryMenuActivated("all")
                                 }}>
                                     All
                                 </li>
-                                <li className={`${categoryMenuActivated === "mobile" ? "categoryMenuActive" : ""}`} onClick={() => {
-                                    filterByCategory("mobile")
-                                    setCategoryMenuActivated("mobile")
+
+                                <li className={`${categoryMenuActivated === "Kid" ? "categoryMenuActive" : ""}`} onClick={() => {
+                                    filterByCategory("Kid")
+                                    setCategoryMenuActivated("Kid")
                                 }}>
-                                    Mobile
+                                    Kid
                                 </li>
-                                <li className={`${categoryMenuActivated === "laptop" ? "categoryMenuActive" : ""}`} onClick={() => {
-                                    filterByCategory("laptop")
-                                    setCategoryMenuActivated("laptop")
+                                <li className={`${categoryMenuActivated === "Men" ? "categoryMenuActive" : ""}`} onClick={() => {
+                                    filterByCategory("Men")
+                                    setCategoryMenuActivated("Men")
                                 }}>
-                                    Laptop
+                                    Men
                                 </li>
-                                <li className={`${categoryMenuActivated === "computer" ? "categoryMenuActive" : ""}`} onClick={() => {
-                                    filterByCategory("computer")
-                                    setCategoryMenuActivated("computer")
+                                <li className={`${categoryMenuActivated === "Women" ? "categoryMenuActive" : ""}`} onClick={() => {
+                                    filterByCategory("Women")
+                                    setCategoryMenuActivated("Women")
                                 }}>
-                                    Computer
-                                </li>
-                                <li className={`${categoryMenuActivated === "accessories" ? "categoryMenuActive" : ""}`} onClick={() => {
-                                    filterByCategory("accessories")
-                                    setCategoryMenuActivated("accessories")
-                                }}>
-                                    Accessories
-                                </li>
-                                <li className={`${categoryMenuActivated === "watch" ? "categoryMenuActive" : ""}`} onClick={() => {
-                                    filterByCategory("watch")
-                                    setCategoryMenuActivated("watch")
-                                }}>
-                                    Watch
+                                    Women
                                 </li>
                             </ul>
                         </div>
@@ -213,7 +183,7 @@ export default function Products() {
                                         <input type="text" placeholder='Search' onChange={updateSearchValue} value={text}
                                             name='searchText' />
                                     </form>
-                                    <div className="searcIcon">
+                                    <div className="searchIcon">
                                         <BsSearch />
                                     </div>
                                 </div>
@@ -223,51 +193,40 @@ export default function Products() {
                                     </div>
                                     <ul className="categoryMenu">
                                         <li className={`${categoryMenuActivated === "all" ? "categoryMenuActive" : ""}`} onClick={() => {
-                                            filterByCategory("")
+                                            filterByCategory("all")
                                             setCategoryMenuActivated("all")
                                             setShowMobileFilter(false)
                                         }}>
                                             All
                                         </li>
-                                        <li className={`${categoryMenuActivated === "mobile" ? "categoryMenuActive" : ""}`} onClick={() => {
-                                            filterByCategory("mobile")
-                                            setCategoryMenuActivated("mobile")
+                                        <li className={`${categoryMenuActivated === "Kid" ? "categoryMenuActive" : ""}`} onClick={() => {
+                                            filterByCategory("Kid")
+                                            setCategoryMenuActivated("Kid")
                                             setShowMobileFilter(false)
                                         }}>
-                                            Mobile
+                                            Kid
                                         </li>
-                                        <li className={`${categoryMenuActivated === "laptop" ? "categoryMenuActive" : ""}`} onClick={() => {
-                                            filterByCategory("laptop")
-                                            setCategoryMenuActivated("laptop")
+                                        <li className={`${categoryMenuActivated === "Men" ? "categoryMenuActive" : ""}`} onClick={() => {
+                                            filterByCategory("Men")
+                                            setCategoryMenuActivated("Men")
                                             setShowMobileFilter(false)
                                         }}>
-                                            Laptop
+                                            Men
                                         </li>
-                                        <li className={`${categoryMenuActivated === "computer" ? "categoryMenuActive" : ""}`} onClick={() => {
-                                            filterByCategory("computer")
-                                            setCategoryMenuActivated("computer")
+                                        <li className={`${categoryMenuActivated === "Women" ? "categoryMenuActive" : ""}`} onClick={() => {
+                                            filterByCategory("Women")
+                                            setCategoryMenuActivated("Women")
                                             setShowMobileFilter(false)
                                         }}>
-                                            Computer
-                                        </li>
-                                        <li className={`${categoryMenuActivated === "accessories" ? "categoryMenuActive" : ""}`} onClick={() => {
-                                            filterByCategory("accessories")
-                                            setCategoryMenuActivated("accessories")
-                                            setShowMobileFilter(false)
-                                        }}>
-                                            Accessories
-                                        </li>
-                                        <li className={`${categoryMenuActivated === "watch" ? "categoryMenuActive" : ""}`} onClick={() => {
-                                            filterByCategory("watch")
-                                            setCategoryMenuActivated("watch")
-                                            setShowMobileFilter(false)
-                                        }}>
-                                            Watch
+                                            Women
                                         </li>
                                     </ul>
                                 </div>
                                 <div className="clearFilters">
-                                    <div className="clearFilterButton" onClick={handleClearFilters}>
+                                    <div className="clearFilterButton" onClick={() => {
+                                        handleClearFilters()
+                                        setShowMobileFilter(false)
+                                    }}>
                                         Clear Filters
                                     </div>
                                 </div>
@@ -286,7 +245,7 @@ export default function Products() {
                             </div>
                         </div>
                         <div className="productsQuantity">
-                            {filteredProductData.length === 0 ? productData.length : filteredProductData.length} total products.
+                            {currentProducts.length === 0 ? 0 : currentProducts.length} / {filteredProductData.length} total products.
                         </div>
                         <div className="filterDropdown">
                             <form action="#">
@@ -312,33 +271,34 @@ export default function Products() {
                     </div>
                     {gridLayout ? (
                         <div className="productsContainerGridLayout">
-                            {filteredProductData.length === 0
-                                ? productData.map(data => (
-                                    <div className="productsItemGridLayout" key={data.id}>
-                                        <Product productDetailsData={data} gridLayout={gridLayout} />
-                                    </div>
-                                ))
-                                : filteredProductData.map(data => (
+                            {currentProducts.length === 0
+                                ? <></>
+                                : currentProducts?.map(data => (
                                     <div className="productsItemGridLayout" key={data.id}>
                                         <Product productDetailsData={data} gridLayout={gridLayout} />
                                     </div>
                                 ))}
+
                         </div>
                     ) : (
                         <div className="productsContainerListLayout">
-                            {filteredProductData.length === 0
-                                ? productData.map(data => (
-                                    <div className="productsItemListLayout" key={data.id}>
-                                        <Product productDetailsData={data} gridLayout={gridLayout} />
-                                    </div>
-                                ))
-                                : filteredProductData.map(data => (
+                            {currentProducts.length === 0
+                                ? <></>
+                                : currentProducts?.map(data => (
                                     <div className="productsItemListLayout" key={data.id}>
                                         <Product productDetailsData={data} gridLayout={gridLayout} />
                                     </div>
                                 ))}
                         </div>
                     )}
+                    <div className="pagination">
+                        <button onClick={prevPage} disabled={currentPage === 1}>
+                            <MdKeyboardArrowLeft />
+                        </button>
+                        <button onClick={nextPage} disabled={currentProducts.length < productsPerPage}>
+                            <MdKeyboardArrowRight />
+                        </button>
+                    </div>
                 </div>
             </div >
         </div >
