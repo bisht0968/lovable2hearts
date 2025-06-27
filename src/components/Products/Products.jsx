@@ -137,9 +137,9 @@ export default function Products({ mobileLayout }) {
                                     All
                                 </li>
 
-                                <li className={`${categoryMenuActivated === "Kid" ? "categoryMenuActive" : ""}`} onClick={() => {
-                                    filterByCategory("Kid")
-                                    setCategoryMenuActivated("Kid")
+                                <li className={`${categoryMenuActivated === "Kids" ? "categoryMenuActive" : ""}`} onClick={() => {
+                                    filterByCategory("Kids")
+                                    setCategoryMenuActivated("Kids")
                                 }}>
                                     Kid
                                 </li>
