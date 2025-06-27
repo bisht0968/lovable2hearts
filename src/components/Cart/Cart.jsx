@@ -96,7 +96,7 @@ export default function Cart({ mobileLayout }) {
                                             window.scrollTo({ top: 0, behavior: 'smooth' })
                                         }}>
                                             <div className="cartProductImage"  >
-                                                <img src={data.image?.[0].url} alt="" />
+                                                <img src={data?.image?.[0]?.url} alt="" />
                                             </div>
                                             <div className="cartProductName" >
                                                 {data.name}
