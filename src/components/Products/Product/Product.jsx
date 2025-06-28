@@ -27,7 +27,7 @@ export default function Product({ productDetailsData, gridLayout }) {
                                 style: "currency",
                                 currency: "INR",
                                 maximumFractionDigits: 2
-                            }).format(productDetailsData.price / 100)}
+                            }).format(productDetailsData.price)}
                         </div>
                         {!gridLayout &&
                             <>
